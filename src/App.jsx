@@ -17,12 +17,12 @@ import Form from "./components/Form";
 const App = () => {
   return (
     <div className="min-h-screen">
-      <Header />
+
       
       <Hero />
       <Service />
       <Gallery />
-      <AIAssistant />
+   
       <Artist />
       <Album />
 
