@@ -186,7 +186,7 @@ export default function FilmmakerPortfolio() {
           </div>
 
           {/* INFINITE AUTOPLAY MARQUEE */}
-          <div className="w-full border-t border-zinc-900 overflow-hidden bg-[#050505] py-8 md:py-12 relative z-20">
+          <div className="w-full border-t border-zinc-900 overflow-hidden bg-[#050505] py-2 md:py-12 relative z-20">
             <motion.div 
               className="flex w-max items-center"
               animate={{ x: ["0%", "-50%"] }}

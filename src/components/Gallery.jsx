@@ -88,7 +88,6 @@ export default function HospitalitySection() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setHoveredIndex(null)}
-      // FIX: Added pt-24 to push the content below a standard header height
       className="relative w-full min-h-[80vh] bg-[#050505] text-white overflow-hidden pt-24 pb-24 md:pb-48 flex flex-col justify-center select-none"
     >
       {/* Background Layer */}
@@ -97,23 +96,35 @@ export default function HospitalitySection() {
         transition={{ duration: 0.5 }}
         className="absolute inset-0 z-0 flex flex-col justify-center"
       >
-   
-
         {/* The Typographic Index */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col gap-6 md:gap-10 mt-16 md:mt-0">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-12 flex flex-col gap-4 md:gap-10 mt-16 md:mt-0">
           {hospitalityData.map((item, index) => (
             <div
               key={item.id}
               onMouseEnter={() => setHoveredIndex(index)}
               onClick={() => setActiveCategory(item)}
-              className="group relative flex flex-row items-center justify-between border-b border-zinc-800/60 pb-6 md:pb-8 cursor-pointer"
+              // UPDATED: Added vertical padding and rounded corners for mobile cards, removed border on mobile
+              className="group relative flex flex-row items-center justify-between border-b-0 md:border-b border-zinc-800/60 py-12 px-6 md:py-0 md:px-0 md:pb-8 cursor-pointer rounded-2xl md:rounded-none overflow-hidden md:overflow-visible"
             >
-              <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-serif tracking-tighter text-zinc-500 transition-all duration-500 ease-out group-hover:text-white group-hover:translate-x-2 md:group-hover:translate-x-6">
+              {/* NEW: Mobile Background Image */}
+              <div className="absolute inset-0 z-0 block md:hidden pointer-events-none">
+                <img
+                  src={item.imageSrc}
+                  alt={item.title}
+                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* Gradient overlay to ensure text is readable */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/80 mix-blend-multiply" />
+              </div>
+
+              {/* UPDATED: Added relative z-10 to ensure text sits above the mobile background. Changed mobile text to white. */}
+              <h2 className="relative z-10 text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-serif tracking-tighter text-white md:text-zinc-500 transition-all duration-500 ease-out group-hover:text-white group-hover:translate-x-2 md:group-hover:translate-x-6">
                 {item.title}
               </h2>
 
-              <div className="flex flex-col items-end opacity-100 md:opacity-0 md:-translate-x-4 transition-all duration-500 ease-out md:group-hover:opacity-100 md:group-hover:translate-x-0">
-                <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-white/70 group-hover:text-white border-b border-transparent group-hover:border-white pb-1 flex items-center gap-2 transition-colors">
+              {/* UPDATED: Added relative z-10 */}
+              <div className="relative z-10 flex flex-col items-end opacity-100 md:opacity-0 md:-translate-x-4 transition-all duration-500 ease-out md:group-hover:opacity-100 md:group-hover:translate-x-0">
+                <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-white/80 md:text-white/70 group-hover:text-white border-b border-transparent group-hover:border-white pb-1 flex items-center gap-2 transition-colors">
                   <span className="hidden sm:inline">View Showreel</span>
                   <span className="sm:hidden">View</span>
                   <svg className="w-3 h-3 transition-transform group-hover:translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -123,7 +134,7 @@ export default function HospitalitySection() {
           ))}
         </div>
 
-        {/* Floating Image Portal */}
+        {/* Floating Image Portal (Desktop Only) */}
         <motion.div
           style={{
             x: cursorX,
@@ -165,13 +176,12 @@ export default function HospitalitySection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            // FIX: z-40 ensures it's under a typical z-50 header. pt-24 pushes content down.
             className="fixed inset-0 z-40 bg-black flex flex-col h-screen overflow-hidden pt-24"
           >
             {/* Header Area Inside Modal */}
             <div className="absolute top-0 left-0 w-full z-20 flex justify-between items-center p-6 md:p-12 pointer-events-none mix-blend-difference text-white mt-24 md:mt-12">
               <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif tracking-tighter">
-              
+                {activeCategory.title}
               </h2>
               <button
                 onClick={() => setActiveCategory(null)}
@@ -226,7 +236,6 @@ export default function HospitalitySection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-            // FIX: Changed z-50 to z-[60] to ensure it sits on top of everything, but with internal padding
             className="fixed inset-0 z-[60] flex flex-col justify-between bg-[#050505] p-6 md:p-12 pt-24"
           >
             <div className="absolute inset-0 w-full h-full overflow-hidden bg-zinc-900">
@@ -247,17 +256,13 @@ export default function HospitalitySection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-black/60" />
             </div>
 
-            {/* Top UI FIX: Added padding-top to clear header */}
             <div className="relative z-10 flex justify-between items-start w-full pointer-events-none pt-12 md:pt-6">
-              <div className="pointer-events-auto">
-              
-              </div>
+              <div className="pointer-events-auto"></div>
               
               <button
                 onClick={() => setActiveProject(null)}
                 className="pointer-events-auto group flex items-center gap-3 text-xs md:text-sm font-bold tracking-widest uppercase hover:text-zinc-300 transition-colors"
               >
-              
                 <div className="w-10 h-10 md:w-12 md:h-12 border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300 bg-black/40 backdrop-blur-md">
                   <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -266,7 +271,6 @@ export default function HospitalitySection() {
               </button>
             </div>
 
-            {/* Bottom UI */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
