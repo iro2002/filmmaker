@@ -5,6 +5,7 @@ import Gallery from "./components/Gallery";
 import AIAssistant from "./components/AIAssistant";
 import Hero from "./components/Hero";
 import Artist from "./components/Artist";
+import Curve from "./components/Curve";
 
 import Album from "./components/Album";
 import Price from "./components/Price";
@@ -20,6 +21,7 @@ const App = () => {
 
       
       <Hero />
+      <Curve />
 
       <Gallery />
    

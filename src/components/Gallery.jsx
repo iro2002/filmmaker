@@ -48,7 +48,7 @@ const hospitalityData = [
   {
     id: "promotions",
     category: "Promotions",
-    title: "Promotions",
+    title: "Exclusive Offers",
     imageSrc: "https://images.unsplash.com/photo-1560624052-449f5ddf0c31?q=80&w=1000&auto=format&fit=crop",
     projects: [
       {
@@ -61,7 +61,12 @@ const hospitalityData = [
   }
 ];
 
+
+
 export default function HospitalitySection() {
+
+
+  
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
