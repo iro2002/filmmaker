@@ -20,7 +20,7 @@ const App = () => {
 
       
       <Hero />
-      <Service />
+
       <Gallery />
    
       <Artist />

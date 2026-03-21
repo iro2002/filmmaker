@@ -7,9 +7,7 @@ const Home = () => {
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const brands = ["NIKE", "RED BULL", "SONY MUSIC", "VOGUE", "PORSCHE", "VICE", "HBO"];
-
-  // Using real high-quality Unsplash placeholders for immediate testing
+  
   const workItems = [
     {text: 'Commercial', image: 'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?auto=format&fit=crop&q=80&w=600&h=400' },
     {text: 'Hospitality', image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=600&h=400' },

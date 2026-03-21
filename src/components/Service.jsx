@@ -33,11 +33,7 @@ const Home = () => {
           transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
           className="flex whitespace-nowrap items-center gap-24 px-12"
         >
-          {[...brands, ...brands].map((brand, i) => (
-            <span key={i} className="text-2xl md:text-4xl font-black tracking-widest text-white/20 uppercase">
-              {brand}
-            </span>
-          ))}
+          
         </motion.div>
       </section>
 

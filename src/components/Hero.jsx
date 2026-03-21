@@ -145,7 +145,7 @@ export default function FilmmakerPortfolio() {
                 // CHANGED MATH: Starts slightly earlier (0.60), 
                 // larger stagger between words (0.008), 
                 // and much longer individual blur duration (0.12).
-                const start = 0.60 + (i * 0.016); 
+                const start = 0.60 + (i * 0.008); 
                 const end = start + 0.30;
 
                 let customClass = "";
