@@ -8,7 +8,7 @@ const hospitalityData = [
   {
     id: "bars",
     category: "Bars",
-    title: "Signature Bars",
+    title: "Bars",
     imageSrc: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop",
     projects: [
       {
@@ -19,7 +19,7 @@ const hospitalityData = [
       },
       {
         id: "bar2",
-        title: "Cocktail Story",
+        title: "Food",
         videoSrc: tempVideo,
         thumbnail: "https://images.unsplash.com/photo-1520207588543-5b8fef1e6d4a?q=80&w=1000&auto=format&fit=crop"
       }
@@ -48,7 +48,7 @@ const hospitalityData = [
   {
     id: "promotions",
     category: "Promotions",
-    title: "Exclusive Offers",
+    title: "Promotions",
     imageSrc: "https://images.unsplash.com/photo-1560624052-449f5ddf0c31?q=80&w=1000&auto=format&fit=crop",
     projects: [
       {
@@ -96,33 +96,35 @@ export default function HospitalitySection() {
         transition={{ duration: 0.5 }}
         className="absolute inset-0 z-0 flex flex-col justify-center"
       >
-        {/* The Typographic Index */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-12 flex flex-col gap-4 md:gap-10 mt-16 md:mt-0">
+        {/* The Typographic Index - REMOVED horizontal padding and max-w */}
+        <div className="relative z-10 w-full flex flex-col gap-4 md:gap-10 mt-16 md:mt-0">
           {hospitalityData.map((item, index) => (
-            <div
+            <motion.div
               key={item.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.15 }}
               onMouseEnter={() => setHoveredIndex(index)}
               onClick={() => setActiveCategory(item)}
-              // UPDATED: Added vertical padding and rounded corners for mobile cards, removed border on mobile
-              className="group relative flex flex-row items-center justify-between border-b-0 md:border-b border-zinc-800/60 py-12 px-6 md:py-0 md:px-0 md:pb-8 cursor-pointer rounded-2xl md:rounded-none overflow-hidden md:overflow-visible"
+              // REMOVED: horizontal padding (px-6/px-0) to make it edge-to-edge
+              className="group relative flex flex-row items-center justify-between border-b-0 md:border-b border-zinc-800/60 py-12 md:py-0 md:pb-8 cursor-pointer overflow-hidden md:overflow-visible"
             >
-              {/* NEW: Mobile Background Image */}
+              {/* Mobile Background Image */}
               <div className="absolute inset-0 z-0 block md:hidden pointer-events-none">
                 <img
                   src={item.imageSrc}
                   alt={item.title}
                   className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
                 />
-                {/* Gradient overlay to ensure text is readable */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/80 mix-blend-multiply" />
+                {/* Changed mix-blend to standard opacity for performance */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/80" />
               </div>
 
-              {/* UPDATED: Added relative z-10 to ensure text sits above the mobile background. Changed mobile text to white. */}
               <h2 className="relative z-10 text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-serif tracking-tighter text-white md:text-zinc-500 transition-all duration-500 ease-out group-hover:text-white group-hover:translate-x-2 md:group-hover:translate-x-6">
                 {item.title}
               </h2>
 
-              {/* UPDATED: Added relative z-10 */}
               <div className="relative z-10 flex flex-col items-end opacity-100 md:opacity-0 md:-translate-x-4 transition-all duration-500 ease-out md:group-hover:opacity-100 md:group-hover:translate-x-0">
                 <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-white/80 md:text-white/70 group-hover:text-white border-b border-transparent group-hover:border-white pb-1 flex items-center gap-2 transition-colors">
                   <span className="hidden sm:inline">View Showreel</span>
@@ -130,7 +132,7 @@ export default function HospitalitySection() {
                   <svg className="w-3 h-3 transition-transform group-hover:translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -159,12 +161,13 @@ export default function HospitalitySection() {
                 src={item.imageSrc}
                 alt={item.title}
                 decoding="async"
-                className={`absolute inset-0 w-full h-full object-cover grayscale-[20%] transition-opacity duration-500 ${
+                // REMOVED grayscale for better rendering performance
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
                   hoveredIndex === index ? "opacity-100" : "opacity-0"
                 }`}
               />
             ))}
-            <div className="absolute inset-0 bg-black/10 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-black/20" />
           </motion.div>
         </motion.div>
       </motion.div>
@@ -178,9 +181,9 @@ export default function HospitalitySection() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 bg-black flex flex-col h-screen overflow-hidden pt-24"
           >
-            {/* Header Area Inside Modal */}
-            <div className="absolute top-0 left-0 w-full z-20 flex justify-between items-center p-6 md:p-12 pointer-events-none mix-blend-difference text-white mt-24 md:mt-12">
-              <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif tracking-tighter">
+            {/* Header Area Inside Modal - Removed mix-blend-difference */}
+            <div className="absolute top-0 left-0 w-full z-20 flex justify-between items-center p-6 md:p-12 pointer-events-none text-white mt-24 md:mt-12 bg-gradient-to-b from-black/80 to-transparent">
+              <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif tracking-tighter drop-shadow-lg">
                 {activeCategory.title}
               </h2>
               <button
@@ -188,7 +191,7 @@ export default function HospitalitySection() {
                 className="pointer-events-auto group flex items-center gap-4 text-xs font-bold tracking-widest uppercase hover:text-white/70 transition-colors"
               >
                 <span className="hidden sm:block">Close</span>
-                <div className="w-10 h-10 md:w-12 md:h-12 border border-white flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300">
+                <div className="w-10 h-10 md:w-12 md:h-12 border border-white flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300 bg-black/40">
                   <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
@@ -235,19 +238,20 @@ export default function HospitalitySection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="fixed inset-0 z-[60] flex flex-col justify-between bg-[#050505] p-6 md:p-12 pt-24"
           >
             <div className="absolute inset-0 w-full h-full overflow-hidden bg-zinc-900">
+              {/* Removed blur filter here to fix video lag */}
               <img
                 src={activeProject.thumbnail}
                 alt="Loading"
-                className="absolute inset-0 w-full h-full object-cover opacity-50 blur-xl scale-110"
+                className="absolute inset-0 w-full h-full object-cover opacity-20 scale-105"
               />
               <motion.video
                 initial={{ scale: 1.05 }}
                 animate={{ opacity: isVideoLoaded ? 1 : 0, scale: isVideoLoaded ? 1 : 1.05 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.6 }}
                 src={activeProject.videoSrc}
                 autoPlay loop muted playsInline
                 onCanPlay={() => setIsVideoLoaded(true)}
@@ -274,7 +278,7 @@ export default function HospitalitySection() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
+              transition={{ delay: 0.1, duration: 0.6 }}
               className="relative z-10 max-w-5xl pointer-events-none pb-4 md:pb-0"
             >
               <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-serif tracking-tighter mb-2 drop-shadow-2xl leading-none">
