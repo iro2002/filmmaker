@@ -16,7 +16,7 @@ import Work from "./components/Work";
 const Home = () => (
   <>
     <Hero />
-    <Work />
+
     <Curve />
     <Gallery />
     <Artist />

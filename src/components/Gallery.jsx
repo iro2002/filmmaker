@@ -1,9 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { motion, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
 
-// IMPORT YOUR LOCAL VIDEO HERE
-import tempVideo from "../images/intro.mp4";
-
+// Vimeo Embed Links with autoplay=1 for full cinematic playback with sound and controls
 const hospitalityData = [
   {
     id: "bars",
@@ -14,13 +12,13 @@ const hospitalityData = [
       {
         id: "bar1",
         title: "Night Lounge",
-        videoSrc: tempVideo,
+        videoSrc: "https://player.vimeo.com/video/1169808419?h=e709793bf5&autoplay=1",
         thumbnail: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop"
       },
       {
         id: "bar2",
         title: "Food",
-        videoSrc: tempVideo,
+        videoSrc: "https://player.vimeo.com/video/1163610565?h=78a0efd031&autoplay=1",
         thumbnail: "https://images.unsplash.com/photo-1520207588543-5b8fef1e6d4a?q=80&w=1000&auto=format&fit=crop"
       }
     ]
@@ -34,13 +32,13 @@ const hospitalityData = [
       {
         id: "food1",
         title: "Gourmet",
-        videoSrc: tempVideo,
+        videoSrc: "https://player.vimeo.com/video/1150841154?h=5e2c23db42&autoplay=1",
         thumbnail: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop"
       },
       {
         id: "food2",
         title: "Chef’s Special",
-        videoSrc: tempVideo,
+        videoSrc: "https://player.vimeo.com/video/1139642147?h=18c1965fe7&autoplay=1",
         thumbnail: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=1000&auto=format&fit=crop"
       }
     ]
@@ -54,19 +52,14 @@ const hospitalityData = [
       {
         id: "promo1",
         title: "Holiday Special",
-        videoSrc: tempVideo,
+        videoSrc: "https://player.vimeo.com/video/1146476528?h=b421ca19f3&autoplay=1",
         thumbnail: "https://images.unsplash.com/photo-1560624052-449f5ddf0c31?q=80&w=1000&auto=format&fit=crop"
       }
     ]
   }
 ];
 
-
-
 export default function HospitalitySection() {
-
-
-  
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
@@ -101,7 +94,6 @@ export default function HospitalitySection() {
         transition={{ duration: 0.5 }}
         className="absolute inset-0 z-0 flex flex-col justify-center"
       >
-        {/* The Typographic Index - REMOVED horizontal padding and max-w */}
         <div className="relative z-10 w-full flex flex-col gap-4 md:gap-10 mt-1 md:mt-0">
           {hospitalityData.map((item, index) => (
             <motion.div
@@ -112,17 +104,14 @@ export default function HospitalitySection() {
               transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.15 }}
               onMouseEnter={() => setHoveredIndex(index)}
               onClick={() => setActiveCategory(item)}
-              // REMOVED: horizontal padding (px-6/px-0) to make it edge-to-edge
               className="group relative flex flex-row items-center justify-between border-b-0 md:border-b border-zinc-800/60 py-12 md:py-0 md:pb-8 cursor-pointer overflow-hidden md:overflow-visible"
             >
-              {/* Mobile Background Image */}
               <div className="absolute inset-0 z-0 block md:hidden pointer-events-none">
                 <img
                   src={item.imageSrc}
                   alt={item.title}
                   className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
                 />
-                {/* Changed mix-blend to standard opacity for performance */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/80" />
               </div>
 
@@ -166,7 +155,6 @@ export default function HospitalitySection() {
                 src={item.imageSrc}
                 alt={item.title}
                 decoding="async"
-                // REMOVED grayscale for better rendering performance
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
                   hoveredIndex === index ? "opacity-100" : "opacity-0"
                 }`}
@@ -186,7 +174,6 @@ export default function HospitalitySection() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 bg-black flex flex-col h-screen overflow-hidden pt-24"
           >
-            {/* Header Area Inside Modal - Removed mix-blend-difference */}
             <div className="absolute top-0 left-0 w-full z-20 flex justify-between items-center p-6 md:p-12 pointer-events-none text-white mt-24 md:mt-12 bg-gradient-to-b from-black/80 to-transparent">
               <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif tracking-tighter drop-shadow-lg">
                 {activeCategory.title}
@@ -236,59 +223,41 @@ export default function HospitalitySection() {
         )}
       </AnimatePresence>
 
-      {/* --- FULL SCREEN VIDEO MODAL --- */}
+      {/* --- CLEAN FULL SCREEN VIDEO MODAL --- */}
       <AnimatePresence>
         {activeProject && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="fixed inset-0 z-[60] flex flex-col justify-between bg-[#050505] p-6 md:p-12 pt-24"
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-10"
+            onClick={() => setActiveProject(null)} // Clicking background closes modal
           >
-            <div className="absolute inset-0 w-full h-full overflow-hidden bg-zinc-900">
-              {/* Removed blur filter here to fix video lag */}
-              <img
-                src={activeProject.thumbnail}
-                alt="Loading"
-                className="absolute inset-0 w-full h-full object-cover opacity-20 scale-105"
-              />
-              <motion.video
-                initial={{ scale: 1.05 }}
-                animate={{ opacity: isVideoLoaded ? 1 : 0, scale: isVideoLoaded ? 1 : 1.05 }}
-                transition={{ duration: 0.6 }}
-                src={activeProject.videoSrc}
-                autoPlay loop muted playsInline
-                onCanPlay={() => setIsVideoLoaded(true)}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-black/60" />
-            </div>
-
-            <div className="relative z-10 flex justify-between items-start w-full pointer-events-none pt-12 md:pt-6">
-              <div className="pointer-events-auto"></div>
-              
-              <button
-                onClick={() => setActiveProject(null)}
-                className="pointer-events-auto group flex items-center gap-3 text-xs md:text-sm font-bold tracking-widest uppercase hover:text-zinc-300 transition-colors"
-              >
-                <div className="w-10 h-10 md:w-12 md:h-12 border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300 bg-black/40 backdrop-blur-md">
-                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </div>
-              </button>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6 }}
-              className="relative z-10 max-w-5xl pointer-events-none pb-4 md:pb-0"
+            {/* Simple Close Button */}
+            <button
+              onClick={() => setActiveProject(null)}
+              className="absolute top-6 right-6 md:top-10 md:right-10 z-[70] w-12 h-12 rounded-full border border-white/20 bg-black/50 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all duration-300 backdrop-blur-md"
             >
-              <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-serif tracking-tighter mb-2 drop-shadow-2xl leading-none">
-                {activeProject.title}
-              </h2>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* VIMEO IFRAME */}
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ opacity: isVideoLoaded ? 1 : 0, scale: isVideoLoaded ? 1 : 0.95 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="relative w-full max-w-7xl aspect-video rounded-lg overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] bg-black"
+              onClick={(e) => e.stopPropagation()} // Prevents clicking the video from closing the modal
+            >
+              <iframe
+                src={activeProject.videoSrc}
+                onLoad={() => setIsVideoLoaded(true)}
+                allow="autoplay; fullscreen; picture-in-picture"
+                className="absolute inset-0 w-full h-full border-0"
+              />
             </motion.div>
           </motion.div>
         )}

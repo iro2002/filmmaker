@@ -93,10 +93,7 @@ export default function FilmmakerPortfolio() {
               </motion.h1>
             </div>
             
-            <div className="absolute bottom-12 md:bottom-16 w-full px-12 flex justify-between items-end text-zinc-500 font-sans text-xs tracking-widest uppercase">
-              <span>Loading Vision</span>
-              <span className="text-white text-lg font-medium">{counter}%</span>
-            </div>
+            
           </motion.div>
         )}
       </AnimatePresence>
@@ -136,9 +133,8 @@ export default function FilmmakerPortfolio() {
           >
             <motion.div style={{ opacity: heroOpacity }} className="text-xs text-white mt-auto">
               <p className="text-zinc-500 mb-2">Based in:</p>
-              <p className="font-bold tracking-wide">Los Angeles</p>
-              <p className="font-bold tracking-wide">New York</p>
-              <p className="font-bold tracking-wide">London</p>
+              <p className="font-bold tracking-wide">Sri Lanka</p>
+
             </motion.div>
           </motion.div>
 
