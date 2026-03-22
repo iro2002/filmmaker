@@ -1,187 +1,102 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+// USE ONLINE IMAGES INSTEAD OF VIDEOS
 const data = [
     {
-        num: "01",
-        title: "Commercial / Ads",
-        image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+        title: "Commercial",
+        image: "https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1400&q=80",
     },
     {
-        num: "02",
-        title: "Hospitality / Lifestyle",
-        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+        title: "Hospitality",
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80",
     },
     {
-        num: "03",
         title: "Corporate",
-        image: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=80",
     },
     {
-        num: "04",
         title: "Events",
-        image: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1400&q=80",
     },
     {
-        num: "05",
         title: "Personal Films",
-        image: "https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?auto=format&fit=crop&w=1400&q=80",
     },
 ];
 
-export default function Directing() {
+export default function Director() {
     const containerRef = useRef(null);
+
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"],
     });
 
-    const step = 1 / (data.length - 1);
-
     return (
-        <section className="bg-[#050505] text-white font-sans selection:bg-white/30">
+        <section ref={containerRef} className="h-[600vh] bg-[#050505] text-white relative">
+            <div className="sticky top-0 h-screen flex overflow-hidden">
 
-            <div ref={containerRef} className="relative h-[500vh]">
+                {/* LEFT SIDE (STATIC LIST) */}
+                <div className="w-1/2 flex flex-col justify-center px-8 md:px-16 z-20">
+                    <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] font-serif tracking-tighter mb-16 text-white/90 underline decoration-1 underline-offset-8 decoration-white/40">
+                        Directing
+                    </h2>
 
-                {/* STICKY WRAPPER */}
-                <div className="sticky top-0 h-screen w-full overflow-hidden">
+                    <div className="space-y-8 md:space-y-12">
+                        {data.map((item, i) => {
+                            const step = 1 / data.length;
+                            const start = i * step;
+                            const end = (i + 1) * step;
 
-                    {/* =====================
-                        MOBILE & TABLET VIEW
-                    ===================== */}
-                    <div className="md:hidden absolute inset-0 w-full h-full flex flex-col justify-end">
+                            const opacity = useTransform(scrollYProgress, [start, start + step / 2, end], [0.2, 1, 0.2]);
+                            const x = useTransform(scrollYProgress, [start, start + step / 2], [-20, 0]);
 
-                        {/* Mobile Background Images */}
-                        <div className="absolute inset-0 z-0">
-                            {data.map((item, i) => {
-                                const peak = i * step;
-                                const start = peak - step;
-                                const end = peak + step;
-
-                                const opacity = useTransform(scrollYProgress, [start, peak, end], [0, 1, 0]);
-                                const scale = useTransform(scrollYProgress, [start, peak, end], [1.1, 1, 1]);
-
-                                return (
-                                    <motion.div
-                                        key={i}
-                                        style={{ opacity, scale }}
-                                        className="absolute inset-0 w-full h-full bg-[#111]"
-                                    >
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="w-full h-full object-cover grayscale opacity-80 mix-blend-luminosity"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
-                                    </motion.div>
-                                );
-                            })}
-                        </div>
-
-                        {/* Mobile Text Overlay */}
-                        <div className="relative z-10 p-6 pb-12 pointer-events-none w-full">
-                            {/* Increased Mobile Header from text-3xl to text-5xl */}
-                            <h2 className="text-5xl font-serif mb-8 tracking-tighter text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] border-b border-zinc-800 pb-4 inline-block">
-                                Directing
-                            </h2>
-                            <div className="space-y-7">
-                                {data.map((item, i) => {
-                                    const peak = i * step;
-                                    const start = peak - step;
-                                    const end = peak + step;
-
-                                    const opacity = useTransform(scrollYProgress, [start, peak, end], [0.15, 1, 0.15]);
-                                    const x = useTransform(scrollYProgress, [start, peak, end], [0, 12, 0]);
-                                    const color = useTransform(scrollYProgress, [start, peak, end], ["#52525b", "#ffffff", "#52525b"]);
-                                    const lineWidth = useTransform(scrollYProgress, [start, peak, end], ["0px", "28px", "0px"]);
-
-                                    return (
-                                        <motion.div key={i} style={{ opacity, x, color }} className="flex items-center origin-left">
-                                            {/* Animated Active Indicator Line */}
-                                            <motion.div
-                                                style={{ width: lineWidth }}
-                                                className="h-[2px] bg-white mr-4 overflow-hidden"
-                                            />
-                                            {/* Increased Mobile List from text-xl to text-3xl */}
-                                            <h3 className="text-3xl font-serif tracking-tight flex items-baseline gap-3">
-                                                <span className="text-sm font-sans tracking-widest opacity-50">{item.num}</span>
-                                                {item.title}
-                                            </h3>
-                                        </motion.div>
-                                    );
-                                })}
-                            </div>
-                        </div>
+                            return (
+                                <motion.div key={i} style={{ opacity, x }}>
+                                    <h3 className="text-3xl md:text-5xl lg:text-6xl font-serif tracking-tighter border-l-2 border-white pl-6">
+                                        {item.title}
+                                    </h3>
+                                </motion.div>
+                            );
+                        })}
                     </div>
+                </div>
 
-                    {/* =====================
-                        DESKTOP VIEW
-                    ===================== */}
-                    <div className="hidden md:flex absolute inset-0 w-full h-full items-center px-12 lg:px-24">
+                {/* RIGHT SIDE (SCROLL REVEAL IMAGES) */}
+                <div className="w-1/2 relative h-full bg-black">
+                    {data.map((item, i) => {
+                        const step = 1 / data.length;
+                        const start = i * step;
+                        const next = (i + 1) * step;
 
-                        {/* LEFT: Images */}
-                        <div className="w-7/12 h-full flex items-center justify-center relative z-0">
-                            {data.map((item, i) => {
-                                const peak = i * step;
-                                const start = peak - step;
-                                const end = peak + step;
+                        const x = useTransform(scrollYProgress, [start, start + step * 0.5], ["100%", "0%"]);
+                        const opacity = useTransform(scrollYProgress, [start, start + step * 0.1, next - step * 0.1, next], [0, 1, 1, 0]);
+                        const zIndex = useTransform(scrollYProgress, [start, next], [i + 10, i + 10]);
 
-                                const opacity = useTransform(scrollYProgress, [start, peak, end], [0, 1, 0]);
-                                const scale = useTransform(scrollYProgress, [start, peak, end], [1.05, 1, 0.95]);
+                        return (
+                            <motion.div
+                                key={i}
+                                style={{ x, opacity, zIndex }}
+                                className="absolute inset-0 flex items-center justify-center p-0"
+                            >
+                                <div className="w-full h-full relative overflow-hidden shadow-2xl">
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                                    />
 
-                                return (
-                                    <motion.div
-                                        key={i}
-                                        style={{ opacity, scale }}
-                                        className="absolute inset-0 w-full h-full overflow-hidden bg-[#111]"
-                                    >
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="w-full h-full object-cover grayscale opacity-80 mix-blend-luminosity"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#050505]"></div>
-                                    </motion.div>
-                                );
-                            })}
-                        </div>
-
-                        {/* RIGHT: Titles */}
-                        <div className="w-5/12 pl-16 z-10 flex flex-col justify-center">
-                            {/* Increased Desktop Header from lg:text-7xl to lg:text-8xl */}
-                            <h2 className="text-6xl lg:text-8xl font-serif mb-16 tracking-tighter text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] border-b border-zinc-800 pb-6 inline-block self-start">
-                                Directing
-                            </h2>
-                            <div className="space-y-12 lg:space-y-14">
-                                {data.map((item, i) => {
-                                    const peak = i * step;
-                                    const start = peak - step;
-                                    const end = peak + step;
-
-                                    const opacity = useTransform(scrollYProgress, [start, peak, end], [0.15, 1, 0.15]);
-                                    const x = useTransform(scrollYProgress, [start, peak, end], [0, 24, 0]);
-                                    const color = useTransform(scrollYProgress, [start, peak, end], ["#52525b", "#ffffff", "#52525b"]);
-                                    const lineWidth = useTransform(scrollYProgress, [start, peak, end], ["0px", "48px", "0px"]);
-
-                                    return (
-                                        <motion.div key={i} style={{ opacity, x, color }} className="flex items-center origin-left">
-                                            {/* Animated Active Indicator Line */}
-                                            <motion.div
-                                                style={{ width: lineWidth }}
-                                                className="h-[3px] bg-white mr-6 overflow-hidden"
-                                            />
-                                            {/* Increased Desktop List from lg:text-5xl to lg:text-6xl */}
-                                            <h3 className="text-4xl lg:text-6xl font-serif tracking-tight leading-none flex items-baseline gap-5">
-                                                <span className="text-lg lg:text-xl font-sans tracking-widest opacity-50">{item.num}</span>
-                                                {item.title}
-                                            </h3>
-                                        </motion.div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-
-                    </div>
+                                    {/* TITLE ONLY (NO DESCRIPTION) */}
+                                    <div className="absolute bottom-12 left-12 max-w-sm bg-black/60 p-8 backdrop-blur-sm border-t border-white/20">
+                                        <h4 className="text-3xl md:text-4xl font-serif tracking-tighter text-white">
+                                            {item.title}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>

@@ -20,9 +20,10 @@ const Home = () => (
     <Curve />
 
     <Gallery />
-    <Directing />
+
 
     <Artist />
+    <Directing />
 
 
 
