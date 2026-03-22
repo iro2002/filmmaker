@@ -19,6 +19,7 @@
     "framer-motion": "^12.34.3",
     "gsap": "^3.14.2",
     "lucide-react": "^0.563.0",
+    "matter-js": "^0.20.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",

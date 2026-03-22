@@ -1,122 +1,131 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
-const Feedback = () => {
-  const feedbackList = [
-    {
-      id: 1,
-      client: "Sarah Jenkins",
-      role: "Director, Starlight Studios",
-      quote: "An absolute masterclass in pacing and visual storytelling. The edit transformed our raw footage into a visceral experience that left the audience speechless.",
-      rating: 5,
-      highlight: true // Makes this card larger/stand out
-    },
-    {
-      id: 2,
-      client: "Marcus Chen",
-      role: "Creative Lead, Synthwave Records",
-      quote: "The color grading was phenomenal. They didn't just balance the image; they gave our music video a distinct, neon-drenched soul.",
-      rating: 5,
-      highlight: false
-    },
-    {
-      id: 3,
-      client: "Elena Rodriguez",
-      role: "Producer, Oceanic Docs",
-      quote: "Incredible attention to detail in the sound design. The auditory landscape they built grounded our documentary and elevated the emotional stakes.",
-      rating: 5,
-      highlight: false
-    },
-    {
-      id: 4,
-      client: "David Thorne",
-      role: "CEO, Apex Automotive",
-      quote: "Fast, dynamic, and aggressively stylish. They perfectly captured the adrenaline and velocity of our brand in a 60-second spot.",
-      rating: 5,
-      highlight: false
-    }
-  ];
+// This simulates the data you will eventually fetch from your CMS (like Sanity.io)
+const blogData = [
+  {
+    id: "post-1",
+    slug: "redefining-signature-venues",
+    category: "Project Breakdowns",
+    title: "Redefining the Signature Venue Experience",
+    excerpt: "A deep dive into the architectural and digital choices behind our latest high-end lounge project.",
+    date: "Oct 24, 2024",
+    readTime: "6 min read",
+    imageSrc: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    id: "post-2",
+    slug: "future-of-luxury-hospitality",
+    category: "Industry Insights",
+    title: "The Future of Luxury Hospitality in a Digital Age",
+    excerpt: "Exploring how top-tier brands are blending physical exclusivity with seamless digital innovation.",
+    date: "Oct 18, 2024",
+    readTime: "4 min read",
+    imageSrc: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    id: "post-3",
+    slug: "creative-process-behind-the-bar",
+    category: "Thoughts",
+    title: "The Creative Process: Building a Brand from the Bar Up",
+    excerpt: "Personal reflections on balancing client vision with uncompromising aesthetic standards.",
+    date: "Oct 02, 2024",
+    readTime: "8 min read",
+    imageSrc: "https://images.unsplash.com/photo-1560624052-449f5ddf0c31?q=80&w=1000&auto=format&fit=crop",
+  }
+];
 
-  // Helper function to render stars
-  const renderStars = (count) => {
-    return (
-      <div className="flex gap-1 mb-6">
-        {[...Array(count)].map((_, i) => (
-          <svg key={i} className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-        ))}
-      </div>
-    );
-  };
+export default function BlogSection() {
+  const [hoveredPost, setHoveredPost] = useState(null);
 
   return (
-    <section id="feedback" className="relative w-full bg-black text-white py-16 md:py-32 font-['Inter'] overflow-hidden">
-      
-      {/* Background Glow Effects */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/5 blur-[120px] rounded-[100%] pointer-events-none"></div>
-
-      <div className="relative z-10 px-6 max-w-7xl mx-auto">
+    <section className="relative w-full min-h-screen bg-[#050505] text-white py-24 md:py-32 select-none">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16 md:mb-24">
-          <h2 className="text-sm tracking-widest text-gray-500 uppercase mb-4 font-mono flex items-center gap-3">
-            <span className="w-8 h-[1px] bg-gray-500"></span>
-            Critical Acclaim
-            <span className="w-8 h-[1px] bg-gray-500"></span>
-          </h2>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight max-w-2xl">
-            Trusted by directors, <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-400 to-gray-600">
-              agencies, and brands.
-            </span>
-          </h3>
-        </div>
-
-        {/* Feedback Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6"
+        >
+          <div>
+            {/* Matches your exact heading font classes */}
+            <h2 className="text-5xl md:text-8xl font-serif tracking-tighter">Journal</h2>
+            <p className="mt-4 text-zinc-400 max-w-md text-sm md:text-base leading-relaxed">
+              Industry insights, creative reflections, and detailed breakdowns of our most ambitious projects.
+            </p>
+          </div>
           
-          {feedbackList.map((item, index) => (
-            <div 
-              key={item.id}
-              className={`relative group p-8 md:p-10 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-500 flex flex-col justify-between ${
-                item.highlight 
-                  ? "md:col-span-2 lg:col-span-2 bg-gradient-to-br from-white/10 to-transparent" 
-                  : "col-span-1"
-              }`}
+          {/* Matches your exact small UI text classes */}
+          <div className="flex gap-4 text-xs font-bold tracking-widest uppercase text-zinc-500">
+            <span className="text-white border-b border-white pb-1 cursor-pointer">All</span>
+            <span className="hover:text-white transition-colors cursor-pointer">Insights</span>
+            <span className="hover:text-white transition-colors cursor-pointer">Projects</span>
+          </div>
+        </motion.div>
+
+        {/* Blog Post List */}
+        <div className="flex flex-col border-t border-zinc-800">
+          {blogData.map((post, index) => (
+            <motion.div
+              key={post.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+              onMouseEnter={() => setHoveredPost(post.id)}
+              onMouseLeave={() => setHoveredPost(null)}
+              className="group relative grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center py-10 md:py-16 border-b border-zinc-800 cursor-pointer"
             >
-              {/* Massive subtle quote mark in background */}
-              <div className="absolute top-6 right-8 text-8xl font-serif text-white opacity-5 pointer-events-none transition-opacity duration-500 group-hover:opacity-10">
-                "
+              
+              {/* Image Column */}
+              <div className="md:col-span-4 overflow-hidden aspect-[4/3] relative rounded-sm">
+                <img 
+                  src={post.imageSrc} 
+                  alt={post.title}
+                  className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 saturate-50 group-hover:saturate-100"
+                />
+                <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:opacity-0" />
               </div>
 
-              <div>
-                {renderStars(item.rating)}
-                <p className={`text-gray-300 font-light leading-relaxed mb-8 relative z-10 ${
-                  item.highlight ? "text-xl md:text-2xl lg:text-3xl" : "text-base md:text-lg"
-                }`}>
-                  "{item.quote}"
+              {/* Content Column */}
+              <div className="md:col-span-8 flex flex-col justify-center">
+                {/* Matches your exact small UI text classes */}
+                <div className="flex items-center gap-4 mb-4 text-[10px] md:text-xs font-bold tracking-widest uppercase text-zinc-500">
+                  <span className="text-white">{post.category}</span>
+                  <span>&mdash;</span>
+                  <span>{post.date}</span>
+                  <span className="hidden sm:inline">&mdash;</span>
+                  <span className="hidden sm:inline">{post.readTime}</span>
+                </div>
+                
+                {/* Matches your exact heading font classes */}
+                <h3 className="text-3xl md:text-5xl lg:text-6xl font-serif tracking-tighter mb-4 md:mb-6 transition-colors duration-300 group-hover:text-zinc-300">
+                  {post.title}
+                </h3>
+                
+                <p className="text-zinc-400 text-sm md:text-base max-w-2xl leading-relaxed mb-6 md:mb-8 opacity-80 group-hover:opacity-100 transition-opacity">
+                  {post.excerpt}
                 </p>
+
+                {/* Matches your exact small UI text classes */}
+                <div className="flex items-center gap-3 text-xs font-bold tracking-widest uppercase mt-auto">
+                  <span className="border-b border-transparent group-hover:border-white pb-1 transition-all duration-300">
+                    Read Article
+                  </span>
+                  <svg className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </div>
               </div>
 
-              <div className="relative z-10 flex items-center gap-4 border-t border-white/10 pt-6 mt-auto">
-                {/* Minimalist Avatar Placeholder */}
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-gray-700 to-gray-500 flex items-center justify-center text-xs font-semibold uppercase text-white">
-                  {item.client.charAt(0)}
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-white tracking-wide">{item.client}</h4>
-                  <p className="text-xs text-gray-500 font-mono uppercase tracking-wider mt-0.5">{item.role}</p>
-                </div>
-              </div>
-
-            </div>
+            </motion.div>
           ))}
-
         </div>
 
       </div>
     </section>
   );
-};
-
-export default Feedback;
+}

@@ -9,7 +9,7 @@ const hospitalityData = [
     id: "bars",
     category: "Bars",
     title: "Bars",
-    imageSrc: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop",
+    imageSrc: "https://ik.imagekit.io/cvygf2xse/beefeatergin/wp-content/uploads/2022/09/beefeater-london-dry-gin-bat-berry-sour-cocktail.jpg?tr=q-80,w-735",
     projects: [
       {
         id: "bar1",
@@ -28,8 +28,8 @@ const hospitalityData = [
   {
     id: "food",
     category: "Food",
-    title: "Culinary Arts",
-    imageSrc: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop",
+    title: "Food",
+    imageSrc: "https://restaurantindia.s3.ap-south-1.amazonaws.com/s3fs-public/2022-07/Food%20Menu.jpg",
     projects: [
       {
         id: "food1",
@@ -48,8 +48,8 @@ const hospitalityData = [
   {
     id: "promotions",
     category: "Promotions",
-    title: "Exclusive Offers",
-    imageSrc: "https://images.unsplash.com/photo-1560624052-449f5ddf0c31?q=80&w=1000&auto=format&fit=crop",
+    title: "Promotions",
+    imageSrc: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/641151494.jpg?k=74ea667970853565b0503bd675936738d08f067267387672c2f6bd32d1a5f0e7&o=",
     projects: [
       {
         id: "promo1",
@@ -102,7 +102,7 @@ export default function HospitalitySection() {
         className="absolute inset-0 z-0 flex flex-col justify-center"
       >
         {/* The Typographic Index - REMOVED horizontal padding and max-w */}
-        <div className="relative z-10 w-full flex flex-col gap-4 md:gap-10 mt-16 md:mt-0">
+        <div className="relative z-10 w-full flex flex-col gap-4 md:gap-10 mt-1 md:mt-0">
           {hospitalityData.map((item, index) => (
             <motion.div
               key={item.id}

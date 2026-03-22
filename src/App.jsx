@@ -31,8 +31,7 @@ const App = () => {
       <Price />
 
     
-      
-      <Faq />
+  
       <Footer />
     </div>
   );
