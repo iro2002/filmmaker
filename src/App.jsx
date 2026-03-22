@@ -11,18 +11,23 @@ import Album from "./components/Album";
 import Price from "./components/Price";
 import Footer from "./components/Footer";
 import CommercialProducing from "./components/CommercialProducing";
-import Work from "./components/Work";
+import Directing from "./components/Directing";
 // --- HOME PAGE COMPONENT ---
 const Home = () => (
   <>
     <Hero />
 
     <Curve />
-    <Gallery />
-    <Artist />
- 
-    <Price />
 
+    <Gallery />
+    <Directing />
+
+    <Artist />
+
+
+
+
+    <Price />
 
     <Footer />
   </>

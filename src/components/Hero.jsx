@@ -11,8 +11,8 @@ const BlurWord = ({ children, progress, range, className }) => {
   const filter = useTransform(blurValue, (v) => `blur(${v}px)`);
 
   return (
-    <motion.span 
-      style={{ opacity, filter, willChange: "opacity, filter" }} 
+    <motion.span
+      style={{ opacity, filter, willChange: "opacity, filter" }}
       className={`inline-block mr-[0.25em] ${className}`}
     >
       {children}
@@ -22,7 +22,7 @@ const BlurWord = ({ children, progress, range, className }) => {
 
 export default function FilmmakerPortfolio() {
   const targetRef = useRef(null);
-  
+
   // --- LOADING STATE ---
   const [isLoading, setIsLoading] = useState(true);
   const [counter, setCounter] = useState(0);
@@ -30,7 +30,7 @@ export default function FilmmakerPortfolio() {
   useEffect(() => {
     // Lock scrolling while loading
     document.body.style.overflow = isLoading ? "hidden" : "auto";
-    
+
     // Simulate cinematic loading progress
     if (isLoading) {
       const interval = setInterval(() => {
@@ -68,7 +68,7 @@ export default function FilmmakerPortfolio() {
   const avatarsScale = useTransform(scrollYProgress, [0.92, 0.98], [0.8, 1]);
 
   const statementText = "With decades of combined experience and an eye for cutting-edge aesthetics, our team delivers films rooted in narrative precision and an unwavering dedication to cinematic excellence.";
-  const words = statementText.split(/( |\n)/).filter(word => word !== " "); 
+  const words = statementText.split(/( |\n)/).filter(word => word !== " ");
 
   return (
     <>
@@ -83,30 +83,30 @@ export default function FilmmakerPortfolio() {
             className="fixed inset-0 z-[100] bg-[#050505] flex flex-col items-center justify-center pointer-events-auto"
           >
             <div className="overflow-hidden">
-              <motion.h1 
+              <motion.h1
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
                 className="text-4xl md:text-6xl text-white font-serif tracking-tighter"
               >
-              ManthilaBalasuriya.com
+                manthilabalasuriya.com
               </motion.h1>
             </div>
-            
-            
+
+
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* --- MAIN PORTFOLIO CONTENT --- */}
       <div ref={targetRef} className="h-[400vh] bg-black relative font-sans">
-        
+
         {/* IMPORTED HEADER */}
         <Header />
 
         {/* --- STICKY VIEWPORT --- */}
         <div className="sticky top-0 h-screen overflow-hidden bg-black">
-          
+
           {/* BACKGROUND LAYER */}
           <div className="absolute inset-0 w-full h-full">
             <video
@@ -117,7 +117,7 @@ export default function FilmmakerPortfolio() {
           </div>
 
           {/* PHASE 2: HORIZONTAL TEXT */}
-          <motion.div 
+          <motion.div
             style={{ x: horizontalTextX, opacity: horizontalTextOpacity }}
             className="absolute top-1/2 -translate-y-1/2 w-full z-10 flex items-center px-4 drop-shadow-2xl pointer-events-none"
           >
@@ -139,7 +139,7 @@ export default function FilmmakerPortfolio() {
           </motion.div>
 
           {/* PHASE 1: MAIN HERO TITLE */}
-          <motion.div 
+          <motion.div
             style={{ opacity: heroOpacity }}
             className="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none px-4"
           >
@@ -161,17 +161,17 @@ export default function FilmmakerPortfolio() {
             <div className="h-24 md:h-32"></div>
 
             <div className="flex-1 flex flex-col items-center justify-center px-6 md:px-12 w-full max-w-6xl mx-auto relative z-10">
-              
+
               {/* THE BOLD STATEMENT */}
-              <motion.h2 
-                style={{ 
-                  rotate: statementRotate, 
-                  transformOrigin: "0% 50%" 
+              <motion.h2
+                style={{
+                  rotate: statementRotate,
+                  transformOrigin: "0% 50%"
                 }}
                 className="text-3xl md:text-5xl lg:text-6xl text-white font-serif leading-[1.2] md:leading-[1.1] tracking-tight text-center flex flex-wrap justify-center max-w-5xl"
               >
                 {words.map((word, i) => {
-                  const start = 0.60 + (i * 0.008); 
+                  const start = 0.60 + (i * 0.008);
                   const end = start + 0.30;
 
                   let customClass = "";
@@ -182,9 +182,9 @@ export default function FilmmakerPortfolio() {
                   }
 
                   return (
-                    <BlurWord 
-                      key={i} 
-                      progress={scrollYProgress} 
+                    <BlurWord
+                      key={i}
+                      progress={scrollYProgress}
                       range={[start, end]}
                       className={customClass}
                     >
@@ -195,7 +195,7 @@ export default function FilmmakerPortfolio() {
               </motion.h2>
 
               {/* The Avatar Module */}
-              <motion.div 
+              <motion.div
                 style={{ opacity: avatarsOpacity, scale: avatarsScale }}
                 className="mt-12 md:mt-16 flex items-center gap-5 bg-zinc-900/30 p-2 pr-8 rounded-full border border-zinc-800 backdrop-blur-md hover:bg-zinc-900/50 transition-colors cursor-pointer"
               >
@@ -212,14 +212,14 @@ export default function FilmmakerPortfolio() {
 
             {/* INFINITE AUTOPLAY MARQUEE */}
             <div className="w-full border-t border-zinc-900 overflow-hidden bg-[#050505] py-2 md:py-12 relative z-20">
-              <motion.div 
+              <motion.div
                 className="flex w-max items-center"
                 animate={{ x: ["0%", "-50%"] }}
                 transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
               >
               </motion.div>
             </div>
-            
+
           </motion.div>
         </div>
       </div>
