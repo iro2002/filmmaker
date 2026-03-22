@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useInView, useAnimation } from 'framer-motion';
 
 // --- DATA ---
 const BRANDS = ["HBO", "PORSCHE", "VOGUE", "NIKE", "A24", "SONY", "NETFLIX", "RED BULL"];
@@ -23,95 +23,202 @@ const Laurel = ({ className }) => (
   </svg>
 );
 
+// --- ANIMATION VARIANTS ---
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { type: 'spring', stiffness: 100, damping: 20 },
+  },
+};
+
+const brandVariants = {
+    hover: {
+        scale: 1.1,
+        color: "#ffffff",
+        transition: { duration: 0.4, ease: "easeOut" }
+    }
+};
+
+const houseVariants = {
+  hidden: itemVariants.hidden,
+  visible: itemVariants.visible,
+  hover: {
+    backgroundColor: "rgba(39, 39, 42, 0.3)", // zinc-800/30
+    transition: { duration: 0.3 },
+  },
+};
+
+const awardVariants = {
+    hidden: itemVariants.hidden,
+    visible: itemVariants.visible,
+    hover: {
+        x: 10,
+        transition: { duration: 0.3, ease: "easeOut"}
+    }
+}
+
+const laurelVariants = {
+    hover: {
+        scale: 1.15,
+        rotate: [0, -5, 5, 0],
+        color: "#D4AF37", // gold
+        transition: { duration: 0.6, ease: "easeInOut" }
+    }
+}
+
+
 export default function SocialProof() {
-  const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-10%" });
+  const mainRef = useRef(null);
+  const isInView = useInView(mainRef, { once: true, margin: "-15%" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [isInView, controls]);
 
   return (
-    <section ref={containerRef} className="w-full bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-zinc-900">
+    <section ref={mainRef} className="w-full bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-zinc-900">
       
       {/* ==========================================
-          PART 1: THE BRANDS (INFINITE MARQUEE)
+          PART 1: THE BRANDS (INTERACTIVE SLIDER)
       ========================================== */}
-      <div className="w-full flex flex-col items-center mb-32">
-        <p className="text-zinc-500 text-xs tracking-[0.2em] uppercase mb-8">Trusted by industry leaders</p>
+      <motion.div 
+        className="w-full flex flex-col items-center mb-32"
+        initial="hidden"
+        animate={controls}
+        variants={containerVariants}
+      >
+        <motion.p variants={itemVariants} className="text-zinc-500 text-xs tracking-[0.2em] uppercase mb-10">Trusted by industry leaders</motion.p>
         
-        {/* Marquee Container */}
-        <div className="w-full flex overflow-hidden relative">
-          {/* Left/Right Fade Masks so it blends into the black background */}
-          <div className="absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-1/6 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
+        {/* Interactive Slider Container */}
+        <div className="w-full flex overflow-hidden relative group cursor-grab active:cursor-grabbing">
+          {/* Fades */}
+          <div className="absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-1/5 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
           
           <motion.div 
-            className="flex whitespace-nowrap items-center gap-16 md:gap-32 pr-16 md:pr-32"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
+            className="flex whitespace-nowrap items-center gap-16 md:gap-24 px-[10vw]"
+            drag="x"
+            dragConstraints={{ left: -1500, right: 0 }} // Adjust based on content width
+            variants={itemVariants}
           >
-            {/* Render the list twice to create a seamless loop */}
-            {[...BRANDS, ...BRANDS].map((brand, i) => (
-              <span key={i} className="text-4xl md:text-7xl font-serif tracking-tighter text-zinc-700 hover:text-white transition-colors duration-500 cursor-default select-none">
+            {BRANDS.map((brand, i) => (
+              <motion.span 
+                key={i} 
+                className="text-5xl md:text-8xl font-serif tracking-tighter text-zinc-700 select-none"
+                variants={brandVariants}
+                whileHover="hover"
+              >
                 {brand}
-              </span>
+              </motion.span>
             ))}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="max-w-6xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-24">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-[1.2fr,1fr] gap-24 lg:gap-32">
         
         {/* ==========================================
-            PART 2: PRODUCTION HOUSES (HOVER LIST)
+            PART 2: PRODUCTION HOUSES (INTERACTIVE LIST)
         ========================================== */}
         <motion.div 
           className="flex flex-col"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          initial="hidden"
+          animate={controls}
+          variants={containerVariants}
         >
-          <h3 className="text-zinc-500 text-xs tracking-[0.2em] uppercase mb-8 border-b border-zinc-900 pb-4">Collaborators</h3>
+          <motion.h3 variants={itemVariants} className="text-zinc-500 text-xs tracking-[0.2em] uppercase mb-10 border-b border-zinc-900 pb-5">Collaborators</motion.h3>
           
-          {/* Group hover handles dimming all items except the hovered one */}
-          <div className="flex flex-col group">
+          <div className="flex flex-col group/list">
             {PROD_HOUSES.map((house, i) => (
-              <div 
+              <motion.div 
                 key={i} 
-                className="flex justify-between items-end py-6 border-b border-zinc-900/50 text-zinc-400 transition-all duration-300 hover:!text-white hover:!opacity-100 group-hover:opacity-30 cursor-pointer"
+                className="flex justify-between items-center p-6 md:p-8 border-b border-zinc-900/70 text-zinc-400 transition-opacity duration-300 group-hover/list:opacity-50 hover:!opacity-100 cursor-pointer rounded-xl"
+                variants={houseVariants}
+                whileHover="hover"
               >
-                <span className="text-2xl md:text-3xl font-serif tracking-tight">{house.name}</span>
-                <span className="text-xs md:text-sm font-light tracking-widest uppercase">{house.location}</span>
-              </div>
+                <div className="flex flex-col gap-1">
+                    <motion.span 
+                        className="text-3xl md:text-4xl lg:text-5xl font-serif tracking-tight text-white"
+                        whileHover={{ x: 5, transition: {duration: 0.2}}}
+                    >
+                        {house.name}
+                    </motion.span>
+                    <span className="text-xs md:text-sm font-light tracking-widest uppercase text-zinc-500">{house.location}</span>
+                </div>
+                
+                {/* Visual Cue on Hover */}
+                <motion.span 
+                    className="text-xl text-zinc-700 opacity-0 group-hover:opacity-100 transition-opacity"
+                    initial={{ x: -10 }}
+                    whileHover={{ x: 0, opacity: 1}}
+                >
+                    →
+                </motion.span>
+
+              </motion.div>
             ))}
           </div>
         </motion.div>
 
 
         {/* ==========================================
-            PART 3: AWARDS & FESTIVALS (LAURELS)
+            PART 3: AWARDS & FESTIVALS (INTERACTIVE LAURELS)
         ========================================== */}
         <motion.div 
           className="flex flex-col"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          initial="hidden"
+          animate={controls}
+          variants={containerVariants}
         >
-          <h3 className="text-zinc-500 text-xs tracking-[0.2em] uppercase mb-8 border-b border-zinc-900 pb-4">Accolades</h3>
+          <motion.h3 variants={itemVariants} className="text-zinc-500 text-xs tracking-[0.2em] uppercase mb-10 border-b border-zinc-900 pb-5">Accolades</motion.h3>
           
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-10 md:gap-12">
             {AWARDS.map((award, i) => (
-              <div key={i} className="flex items-center gap-6 group cursor-default">
+              <motion.div 
+                key={i} 
+                className="flex items-start gap-6 md:gap-8 group/award cursor-default"
+                variants={awardVariants}
+                whileHover="hover"
+              >
                 
-                {/* SVG Laurel Graphic */}
-                <Laurel className="w-16 h-16 md:w-20 md:h-20 text-zinc-700 group-hover:text-[#D4AF37] transition-colors duration-500" />
+                {/* SVG Laurel Graphic with Animation */}
+                <motion.div
+                    className="flex-shrink-0 pt-1"
+                    variants={laurelVariants}
+                >
+                    <Laurel className="w-16 h-16 md:w-20 md:h-20 text-zinc-800 transition-colors duration-300 group-hover/award:text-[#D4AF37]" />
+                </motion.div>
                 
-                <div className="flex flex-col">
-                  <span className="text-xl md:text-2xl font-serif text-white">{award.title}</span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-sm text-zinc-400 italic font-light">{award.festival}</span>
-                    <span className="text-xs text-zinc-600">— {award.year}</span>
+                <div className="flex flex-col gap-2">
+                  <motion.span 
+                    className="text-2xl md:text-3xl font-serif text-white leading-tight"
+                    whileHover={{ color: "#D4AF37", transition: { duration: 0.3 } }}
+                  >
+                    {award.title}
+                  </motion.span>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-sm md:text-base">
+                    <span className="text-zinc-400 italic font-light">{award.festival}</span>
+                    <span className="text-zinc-600">— {award.year}</span>
                   </div>
                 </div>
 
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>
