@@ -20,8 +20,10 @@ const Home = () => (
     <Curve />
     <Gallery />
     <Artist />
-    <Album />
+ 
     <Price />
+
+
     <Footer />
   </>
 );
@@ -41,7 +43,7 @@ const App = () => {
     <div className="min-h-screen bg-[#050505]">
       {/* Header stays persistent across all routes */}
       <Header />
-      
+
       {/* Standard routing */}
       <Routes>
         <Route path="/" element={<Home />} />

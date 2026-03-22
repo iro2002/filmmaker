@@ -249,7 +249,7 @@ export default function HospitalitySection() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ opacity: isVideoLoaded ? 1 : 0, scale: isVideoLoaded ? 1 : 0.95 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="relative w-full max-w-7xl aspect-video rounded-lg overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] bg-black"
+              className="relative w-full h-[85vh] md:h-auto max-w-7xl md:aspect-video rounded-lg overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] bg-black"
               onClick={(e) => e.stopPropagation()} // Prevents clicking the video from closing the modal
             >
               <iframe
