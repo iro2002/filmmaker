@@ -12,6 +12,8 @@ import Price from "./components/Price";
 import Footer from "./components/Footer";
 import CommercialProducing from "./components/CommercialProducing";
 import Directing from "./components/Directing";
+import Collaborators from "./components/Collaborators";
+
 // --- HOME PAGE COMPONENT ---
 const Home = () => (
   <>
@@ -42,6 +44,14 @@ const Commercial = () => (
   </>
 );
 
+// --- COLLABORATORS PAGE COMPONENT ---
+const CollaboratorsPage = () => (
+  <>
+    <Collaborators />
+    <Footer />
+  </>
+);
+
 // --- MAIN APP COMPONENT ---
 const App = () => {
   return (
@@ -54,6 +64,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/commercial-producing" element={<Commercial />} />
+        <Route path="/collaborators" element={<CollaboratorsPage />} />
       </Routes>
     </div>
   );

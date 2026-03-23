@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Header from "./Header"; // Adjust import path as needed
 
 // IMPORT YOUR LOCAL VIDEO HERE
@@ -20,12 +21,25 @@ const BlurWord = ({ children, progress, range, className }) => {
   );
 };
 
+// --- DUMMY DATA FOR THE HOVER ROSTER ---
+const rosterData = [
+  { id: 1, name: "Elena Rostova", role: "Director", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&h=800" },
+  { id: 2, name: "Marcus Chen", role: "Cinematographer", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=800" },
+  { id: 3, name: "Sarah Jenkins", role: "Creative Director", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&h=800" },
+  { id: 4, name: "David Kim", role: "VFX Supervisor", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&h=800" },
+  { id: 5, name: "View All", role: "Collaborators", image: "https://images.unsplash.com/photo-1604079628040-94301bb21b91?auto=format&fit=crop&w=600&h=800" }
+];
+
 export default function FilmmakerPortfolio() {
   const targetRef = useRef(null);
+  const navigate = useNavigate();
 
   // --- LOADING STATE ---
   const [isLoading, setIsLoading] = useState(true);
   const [counter, setCounter] = useState(0);
+
+  // --- HOVER STATE FOR AVATAR ACCORDION ---
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {
     // Lock scrolling while loading
@@ -37,10 +51,10 @@ export default function FilmmakerPortfolio() {
         setCounter((prev) => {
           if (prev >= 100) {
             clearInterval(interval);
-            setTimeout(() => setIsLoading(false), 600); // Slight pause at 100% before fade out
+            setTimeout(() => setIsLoading(false), 600);
             return 100;
           }
-          return prev + Math.floor(Math.random() * 5) + 1; // Random jumps for a more organic feel
+          return prev + Math.floor(Math.random() * 5) + 1;
         });
       }, 40);
       return () => clearInterval(interval);
@@ -64,10 +78,8 @@ export default function FilmmakerPortfolio() {
   // --- PHASE 3: Container Animation ---
   const page2Y = useTransform(scrollYProgress, [0.6, 0.85], ["100%", "0%"]);
   const statementRotate = useTransform(scrollYProgress, [0.60, 0.90], [3, 0]);
-  const avatarsOpacity = useTransform(scrollYProgress, [0.92, 0.98], [0, 1]);
-  const avatarsScale = useTransform(scrollYProgress, [0.92, 0.98], [0.8, 1]);
 
-  const statementText = "With decades of combined experience and an eye for cutting-edge aesthetics, our team delivers films rooted in narrative precision and an unwavering dedication to cinematic excellence.";
+  const statementText = "Producing and directing commercial films by building the right team for each brief, driven by cutting-edge aesthetics and cinematic excellence.";
   const words = statementText.split(/( |\n)/).filter(word => word !== " ");
 
   return (
@@ -79,7 +91,7 @@ export default function FilmmakerPortfolio() {
             key="loader"
             initial={{ y: 0 }}
             exit={{ y: "-100%" }}
-            transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }} // Cinematic swift upward wipe
+            transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
             className="fixed inset-0 z-[100] bg-[#050505] flex flex-col items-center justify-center pointer-events-auto"
           >
             <div className="overflow-hidden">
@@ -92,8 +104,6 @@ export default function FilmmakerPortfolio() {
                 manthilabalasuriya.com
               </motion.h1>
             </div>
-
-
           </motion.div>
         )}
       </AnimatePresence>
@@ -134,7 +144,6 @@ export default function FilmmakerPortfolio() {
             <motion.div style={{ opacity: heroOpacity }} className="text-xs text-white mt-auto">
               <p className="text-zinc-500 mb-2">Based in:</p>
               <p className="font-bold tracking-wide">Sri Lanka</p>
-
             </motion.div>
           </motion.div>
 
@@ -153,14 +162,12 @@ export default function FilmmakerPortfolio() {
             </h1>
           </motion.div>
 
-          {/* --- PHASE 3: BLUR/ROTATE REDESIGN --- */}
+          {/* --- PHASE 3: BLUR/ROTATE & ROSTER ACCORDION --- */}
           <motion.div
             style={{ y: page2Y }}
-            className="absolute inset-0 w-full h-full bg-[#050505] z-40 flex flex-col justify-between overflow-hidden"
+            className="absolute inset-0 w-full h-full bg-[#050505] z-40 flex flex-col justify-center overflow-hidden"
           >
-            <div className="h-24 md:h-32"></div>
-
-            <div className="flex-1 flex flex-col items-center justify-center px-6 md:px-12 w-full max-w-6xl mx-auto relative z-10">
+            <div className="flex flex-col items-center justify-center px-4 md:px-12 w-full max-w-7xl mx-auto relative z-10 gap-16 md:gap-24">
 
               {/* THE BOLD STATEMENT */}
               <motion.h2
@@ -194,32 +201,88 @@ export default function FilmmakerPortfolio() {
                 })}
               </motion.h2>
 
-              {/* The Avatar Module */}
-              <motion.div
-                style={{ opacity: avatarsOpacity, scale: avatarsScale }}
-                className="mt-12 md:mt-16 flex items-center gap-5 bg-zinc-900/30 p-2 pr-8 rounded-full border border-zinc-800 backdrop-blur-md hover:bg-zinc-900/50 transition-colors cursor-pointer"
+              {/* --- ONE-BY-ONE HOVER ACCORDION WITH STAGGERED ENTRANCE --- */}
+              <div
+                className="flex w-full max-w-4xl h-[250px] md:h-[400px] gap-2 md:gap-4 items-center justify-center cursor-pointer"
+                onMouseLeave={() => setHoveredIndex(null)}
+                onClick={() => navigate('/collaborators')}
               >
-                <div className="flex -space-x-4">
-                  <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150" alt="Director 1" className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-[#050505] object-cover grayscale" />
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150" alt="Director 2" className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-[#050505] object-cover grayscale" />
-                  <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&h=150" alt="Director 3" className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-[#050505] object-cover grayscale" />
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white border-2 border-[#050505] flex items-center justify-center text-black font-serif text-sm font-bold z-10">
-                    +20
-                  </div>
-                </div>
-              </motion.div>
-            </div>
+                {rosterData.map((person, i) => {
+                  // Determine the dynamic width of each card based on hover state
+                  const isActive = hoveredIndex === i;
+                  const isSomethingHovered = hoveredIndex !== null;
 
-            {/* INFINITE AUTOPLAY MARQUEE */}
-            <div className="w-full border-t border-zinc-900 overflow-hidden bg-[#050505] py-2 md:py-12 relative z-20">
-              <motion.div
-                className="flex w-max items-center"
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
-              >
-              </motion.div>
-            </div>
+                  const cardWidth = isActive
+                    ? "calc(50% + 100px)" // Expanded size
+                    : isSomethingHovered
+                      ? "calc(10% - 10px)" // Shrunk size
+                      : "20%"; // Default equal size
 
+                  // Create the staggered layout look (alternating up and down)
+                  const staggerY = i % 2 === 0 ? 24 : -24;
+
+                  return (
+                    <motion.div
+                      key={person.id}
+                      onMouseEnter={() => setHoveredIndex(i)}
+                      // 1. Initial hidden state (pushed down)
+                      initial={{ opacity: 0, y: 150 }}
+                      // 2. Trigger one-by-one when scrolled into view
+                      whileInView={{ opacity: 1, y: staggerY }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      // 3. Handle the dynamic hover accordion state
+                      animate={{
+                        width: cardWidth,
+                        filter: isActive || !isSomethingHovered
+                          ? "grayscale(0%) brightness(100%)"
+                          : "grayscale(100%) brightness(40%)"
+                      }}
+                      // 4. Split transitions: slow delayed entrance vs. snappy hover
+                      transition={{
+                        y: { duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] },
+                        opacity: { duration: 0.8, delay: i * 0.15 },
+                        width: { type: "spring", stiffness: 200, damping: 25 },
+                        filter: { duration: 0.3 }
+                      }}
+                      className="relative h-full overflow-hidden bg-zinc-900 border border-zinc-800 group rounded-sm"
+                    >
+                      {/* Background Image */}
+                      <img
+                        src={person.image}
+                        alt={person.name}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+
+                      {/* Dark Gradient Overlay for text readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-100 transition-opacity duration-500" />
+
+                      {/* Text Reveal Logic */}
+                      <motion.div
+                        className="absolute bottom-4 left-4 right-4 flex flex-col"
+                        animate={{ opacity: isActive || !isSomethingHovered ? 1 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="overflow-hidden whitespace-nowrap">
+                          <p className="text-white font-serif text-lg md:text-2xl leading-none">{person.name}</p>
+                          <motion.p
+                            animate={{
+                              height: isActive ? "auto" : 0,
+                              opacity: isActive ? 1 : 0,
+                              marginTop: isActive ? "4px" : "0px"
+                            }}
+                            className="text-zinc-400 text-xs md:text-sm tracking-widest uppercase font-bold"
+                          >
+                            {person.role}
+                          </motion.p>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+              {/* --- END HOVER ACCORDION --- */}
+
+            </div>
           </motion.div>
         </div>
       </div>
