@@ -21,15 +21,6 @@ const BlurWord = ({ children, progress, range, className }) => {
   );
 };
 
-// --- DUMMY DATA FOR THE HOVER ROSTER ---
-const rosterData = [
-  { id: 1, name: "Elena Rostova", role: "Director", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&h=800" },
-  { id: 2, name: "Marcus Chen", role: "Cinematographer", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=800" },
-  { id: 3, name: "Sarah Jenkins", role: "Creative Director", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&h=800" },
-  { id: 4, name: "David Kim", role: "VFX Supervisor", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&h=800" },
-  { id: 5, name: "View All", role: "Collaborators", image: "https://images.unsplash.com/photo-1604079628040-94301bb21b91?auto=format&fit=crop&w=600&h=800" }
-];
-
 export default function FilmmakerPortfolio() {
   const targetRef = useRef(null);
   const navigate = useNavigate();
@@ -37,9 +28,6 @@ export default function FilmmakerPortfolio() {
   // --- LOADING STATE ---
   const [isLoading, setIsLoading] = useState(true);
   const [counter, setCounter] = useState(0);
-
-  // --- HOVER STATE FOR AVATAR ACCORDION ---
-  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {
     // Lock scrolling while loading
@@ -51,10 +39,10 @@ export default function FilmmakerPortfolio() {
         setCounter((prev) => {
           if (prev >= 100) {
             clearInterval(interval);
-            setTimeout(() => setIsLoading(false), 600);
+            setTimeout(() => setIsLoading(false), 600); // Slight pause at 100% before fade out
             return 100;
           }
-          return prev + Math.floor(Math.random() * 5) + 1;
+          return prev + Math.floor(Math.random() * 5) + 1; // Random jumps for a more organic feel
         });
       }, 40);
       return () => clearInterval(interval);
@@ -78,6 +66,8 @@ export default function FilmmakerPortfolio() {
   // --- PHASE 3: Container Animation ---
   const page2Y = useTransform(scrollYProgress, [0.6, 0.85], ["100%", "0%"]);
   const statementRotate = useTransform(scrollYProgress, [0.60, 0.90], [3, 0]);
+  const avatarsOpacity = useTransform(scrollYProgress, [0.92, 0.98], [0, 1]);
+  const avatarsScale = useTransform(scrollYProgress, [0.92, 0.98], [0.8, 1]);
 
   const statementText = "Producing and directing commercial films by building the right team for each brief, driven by cutting-edge aesthetics and cinematic excellence.";
   const words = statementText.split(/( |\n)/).filter(word => word !== " ");
@@ -91,7 +81,7 @@ export default function FilmmakerPortfolio() {
             key="loader"
             initial={{ y: 0 }}
             exit={{ y: "-100%" }}
-            transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+            transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }} // Cinematic swift upward wipe
             className="fixed inset-0 z-[100] bg-[#050505] flex flex-col items-center justify-center pointer-events-auto"
           >
             <div className="overflow-hidden">
@@ -162,12 +152,14 @@ export default function FilmmakerPortfolio() {
             </h1>
           </motion.div>
 
-          {/* --- PHASE 3: BLUR/ROTATE & ROSTER ACCORDION --- */}
+          {/* --- PHASE 3: BLUR/ROTATE REDESIGN --- */}
           <motion.div
             style={{ y: page2Y }}
-            className="absolute inset-0 w-full h-full bg-[#050505] z-40 flex flex-col justify-center overflow-hidden"
+            className="absolute inset-0 w-full h-full bg-[#050505] z-40 flex flex-col justify-between overflow-hidden"
           >
-            <div className="flex flex-col items-center justify-center px-4 md:px-12 w-full max-w-7xl mx-auto relative z-10 gap-16 md:gap-24">
+            <div className="h-24 md:h-32"></div>
+
+            <div className="flex-1 flex flex-col items-center justify-center px-6 md:px-12 w-full max-w-6xl mx-auto relative z-10">
 
               {/* THE BOLD STATEMENT */}
               <motion.h2
@@ -201,88 +193,46 @@ export default function FilmmakerPortfolio() {
                 })}
               </motion.h2>
 
-              {/* --- ONE-BY-ONE HOVER ACCORDION WITH STAGGERED ENTRANCE --- */}
-              <div
-                className="flex w-full max-w-4xl h-[250px] md:h-[400px] gap-2 md:gap-4 items-center justify-center cursor-pointer"
-                onMouseLeave={() => setHoveredIndex(null)}
-                onClick={() => navigate('/collaborators')}
-              >
-                {rosterData.map((person, i) => {
-                  // Determine the dynamic width of each card based on hover state
-                  const isActive = hoveredIndex === i;
-                  const isSomethingHovered = hoveredIndex !== null;
+              {/* --- THE MINIMAL AVATAR PILL --- */}
+              <div className="relative mt-8 group flex justify-center">
+                <motion.div
+                  onClick={() => navigate('/collaborators')}
+                  style={{ opacity: avatarsOpacity, scale: avatarsScale }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center bg-[#111] p-1 pr-4 rounded-full border border-zinc-800 cursor-pointer overflow-hidden shadow-lg transition-colors hover:border-zinc-500"
+                >
+                  {/* Avatars */}
+                  <div className="flex -space-x-3 relative z-10 pl-1">
+                    <img
+                      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150"
+                      alt="Director 1"
+                      className="w-10 h-10 rounded-full border-2 border-[#111] object-cover grayscale"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150"
+                      alt="Director 2"
+                      className="w-10 h-10 rounded-full border-2 border-[#111] object-cover grayscale"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&h=150"
+                      alt="Director 3"
+                      className="w-10 h-10 rounded-full border-2 border-[#111] object-cover grayscale"
+                    />
 
-                  const cardWidth = isActive
-                    ? "calc(50% + 100px)" // Expanded size
-                    : isSomethingHovered
-                      ? "calc(10% - 10px)" // Shrunk size
-                      : "20%"; // Default equal size
-
-                  // Create the staggered layout look (alternating up and down)
-                  const staggerY = i % 2 === 0 ? 24 : -24;
-
-                  return (
-                    <motion.div
-                      key={person.id}
-                      onMouseEnter={() => setHoveredIndex(i)}
-                      // 1. Initial hidden state (pushed down)
-                      initial={{ opacity: 0, y: 150 }}
-                      // 2. Trigger one-by-one when scrolled into view
-                      whileInView={{ opacity: 1, y: staggerY }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      // 3. Handle the dynamic hover accordion state
-                      animate={{
-                        width: cardWidth,
-                        filter: isActive || !isSomethingHovered
-                          ? "grayscale(0%) brightness(100%)"
-                          : "grayscale(100%) brightness(40%)"
-                      }}
-                      // 4. Split transitions: slow delayed entrance vs. snappy hover
-                      transition={{
-                        y: { duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] },
-                        opacity: { duration: 0.8, delay: i * 0.15 },
-                        width: { type: "spring", stiffness: 200, damping: 25 },
-                        filter: { duration: 0.3 }
-                      }}
-                      className="relative h-full overflow-hidden bg-zinc-900 border border-zinc-800 group rounded-sm"
-                    >
-                      {/* Background Image */}
-                      <img
-                        src={person.image}
-                        alt={person.name}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-
-                      {/* Dark Gradient Overlay for text readability */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-100 transition-opacity duration-500" />
-
-                      {/* Text Reveal Logic */}
-                      <motion.div
-                        className="absolute bottom-4 left-4 right-4 flex flex-col"
-                        animate={{ opacity: isActive || !isSomethingHovered ? 1 : 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="overflow-hidden whitespace-nowrap">
-                          <p className="text-white font-serif text-lg md:text-2xl leading-none">{person.name}</p>
-                          <motion.p
-                            animate={{
-                              height: isActive ? "auto" : 0,
-                              opacity: isActive ? 1 : 0,
-                              marginTop: isActive ? "4px" : "0px"
-                            }}
-                            className="text-zinc-400 text-xs md:text-sm tracking-widest uppercase font-bold"
-                          >
-                            {person.role}
-                          </motion.p>
-                        </div>
-                      </motion.div>
-                    </motion.div>
-                  );
-                })}
+                    {/* +20 Badge */}
+                    <div className="w-10 h-10 rounded-full bg-white border-2 border-[#111] flex items-center justify-center text-black font-serif text-sm font-bold z-10 shadow-inner">
+                      +20
+                    </div>
+                  </div>
+                </motion.div>
               </div>
-              {/* --- END HOVER ACCORDION --- */}
+              {/* --- END MINIMAL AVATAR PILL --- */}
 
             </div>
+
+
+
           </motion.div>
         </div>
       </div>

@@ -13,22 +13,28 @@ import Footer from "./components/Footer";
 import CommercialProducing from "./components/CommercialProducing";
 import Directing from "./components/Directing";
 import Collaborators from "./components/Collaborators";
+import Category from "./components/Category";
+import Abouth from "./components/Abouth";
+import HouseAndBrand from "./components/HouseAndBrand";
 
 // --- HOME PAGE COMPONENT ---
 const Home = () => (
   <>
     <Hero />
+    <Category />
+    <Abouth />
+
 
     <Curve />
 
-    <Gallery />
+
 
 
     <Artist />
-    <Directing />
 
 
 
+    <HouseAndBrand />
 
     <Price />
 
