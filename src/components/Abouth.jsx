@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 // Import the local image from your src folder
 import manthilaImg from '../images/manthila.png';
@@ -93,13 +94,13 @@ const Abouth = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.6 }}
                     >
-                        <a
-                            href="/directing"
+                        <Link
+                            to="/directing"
                             className="inline-flex items-center gap-3 text-white border-b border-zinc-700 pb-1 hover:border-white transition-colors group"
                         >
                             <span className="font-serif tracking-wide text-lg">Explore my work</span>
                             <span className="group-hover:translate-x-2 transition-transform">&rarr;</span>
-                        </a>
+                        </Link>
                     </motion.div>
                 </motion.div>
 

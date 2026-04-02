@@ -2,24 +2,12 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header"; // Adjust import path as needed
+import Category from "./Category"; // Embedded inside Hero
 
 // IMPORT YOUR LOCAL VIDEO HERE
 import introVideo from "../images/intro.mp4";
 
-const BlurWord = ({ children, progress, range, className }) => {
-  const opacity = useTransform(progress, range, [0.1, 1]);
-  const blurValue = useTransform(progress, range, [4, 0]);
-  const filter = useTransform(blurValue, (v) => `blur(${v}px)`);
 
-  return (
-    <motion.span
-      style={{ opacity, filter, willChange: "opacity, filter" }}
-      className={`inline-block mr-[0.25em] ${className}`}
-    >
-      {children}
-    </motion.span>
-  );
-};
 
 export default function FilmmakerPortfolio() {
   const targetRef = useRef(null);
@@ -65,12 +53,8 @@ export default function FilmmakerPortfolio() {
 
   // --- PHASE 3: Container Animation ---
   const page2Y = useTransform(scrollYProgress, [0.6, 0.85], ["100%", "0%"]);
-  const statementRotate = useTransform(scrollYProgress, [0.60, 0.90], [3, 0]);
-  const avatarsOpacity = useTransform(scrollYProgress, [0.92, 0.98], [0, 1]);
-  const avatarsScale = useTransform(scrollYProgress, [0.92, 0.98], [0.8, 1]);
 
-  const statementText = "Producing and directing commercial films by building the right team for each brief, driven by cutting-edge aesthetics and cinematic excellence.";
-  const words = statementText.split(/( |\n)/).filter(word => word !== " ");
+  // Text removed as per user request
 
   return (
     <>
@@ -157,81 +141,12 @@ export default function FilmmakerPortfolio() {
             style={{ y: page2Y }}
             className="absolute inset-0 w-full h-full bg-[#050505] z-40 flex flex-col justify-between overflow-hidden"
           >
-            <div className="h-24 md:h-32"></div>
-
-            <div className="flex-1 flex flex-col items-center justify-center px-6 md:px-12 w-full max-w-6xl mx-auto relative z-10">
-
-              {/* THE BOLD STATEMENT */}
-              <motion.h2
-                style={{
-                  rotate: statementRotate,
-                  transformOrigin: "0% 50%"
-                }}
-                className="text-3xl md:text-5xl lg:text-6xl text-white font-serif leading-[1.2] md:leading-[1.1] tracking-tight text-center flex flex-wrap justify-center max-w-5xl"
-              >
-                {words.map((word, i) => {
-                  const start = 0.60 + (i * 0.008);
-                  const end = start + 0.30;
-
-                  let customClass = "";
-                  if (word.includes("cutting-edge") || word.includes("aesthetics,")) {
-                    customClass = "italic text-zinc-500 font-light";
-                  } else if (word.includes("narrative") || word.includes("precision")) {
-                    customClass = "underline decoration-1 underline-offset-[10px] decoration-zinc-800";
-                  }
-
-                  return (
-                    <BlurWord
-                      key={i}
-                      progress={scrollYProgress}
-                      range={[start, end]}
-                      className={customClass}
-                    >
-                      {word}
-                    </BlurWord>
-                  );
-                })}
-              </motion.h2>
-
-              {/* --- THE MINIMAL AVATAR PILL --- */}
-              <div className="relative mt-8 group flex justify-center">
-                <motion.div
-                  onClick={() => navigate('/collaborators')}
-                  style={{ opacity: avatarsOpacity, scale: avatarsScale }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center bg-[#111] p-1 pr-4 rounded-full border border-zinc-800 cursor-pointer overflow-hidden shadow-lg transition-colors hover:border-zinc-500"
-                >
-                  {/* Avatars */}
-                  <div className="flex -space-x-3 relative z-10 pl-1">
-                    <img
-                      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150"
-                      alt="Director 1"
-                      className="w-10 h-10 rounded-full border-2 border-[#111] object-cover grayscale"
-                    />
-                    <img
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150"
-                      alt="Director 2"
-                      className="w-10 h-10 rounded-full border-2 border-[#111] object-cover grayscale"
-                    />
-                    <img
-                      src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&h=150"
-                      alt="Director 3"
-                      className="w-10 h-10 rounded-full border-2 border-[#111] object-cover grayscale"
-                    />
-
-                    {/* +20 Badge */}
-                    <div className="w-10 h-10 rounded-full bg-white border-2 border-[#111] flex items-center justify-center text-black font-serif text-sm font-bold z-10 shadow-inner">
-                      +20
-                    </div>
-                  </div>
-                </motion.div>
+            {/* --- CATEGORY REELS INTEGRATED AS FULL REPLACEMENT --- */}
+            <div className="flex-1 w-full relative z-20 flex items-center justify-center pt-24 md:pt-32 pb-12">
+              <div className="w-full max-w-[1400px]">
+                <Category />
               </div>
-              {/* --- END MINIMAL AVATAR PILL --- */}
-
             </div>
-
-
 
           </motion.div>
         </div>

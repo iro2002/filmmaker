@@ -1,5 +1,21 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
+const BlurWord = ({ children, progress, range, className }) => {
+  const opacity = useTransform(progress, range, [0.1, 1]);
+  const blurValue = useTransform(progress, range, [4, 0]);
+  const filter = useTransform(blurValue, (v) => `blur(${v}px)`);
+
+  return (
+    <motion.span
+      style={{ opacity, filter, willChange: "opacity, filter" }}
+      className={`inline-block mr-[0.25em] ${className}`}
+    >
+      {children}
+    </motion.span>
+  );
+};
 
 // --- THE NEW, BULLETPROOF STACK CARD ---
 const StackCard = ({ item, i, progress, range, targetScale }) => {
@@ -24,7 +40,7 @@ const StackCard = ({ item, i, progress, range, targetScale }) => {
         style={{
           scale,
           // This top offset pushes each subsequent card down slightly so they look like a deck of cards
-          top: `calc(5vh + ${i * 30}px)`, 
+          top: `calc(5vh + ${i * 30}px)`,
         }}
         // CHANGED: Increased width/height significantly and removed all rounded corner classes
         className="relative w-[95vw] max-w-[1600px] h-[85vh] bg-zinc-900 rounded-none overflow-hidden shadow-2xl origin-top border border-zinc-800 group"
@@ -37,7 +53,7 @@ const StackCard = ({ item, i, progress, range, targetScale }) => {
             className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-1000 ease-[0.25,1,0.5,1] rounded-none"
           />
         </motion.div>
-        
+
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none group-hover:bg-black/40 transition-colors duration-700" />
 
         <div className="absolute bottom-10 left-8 md:bottom-16 md:left-16 pointer-events-none">
@@ -59,9 +75,13 @@ const StackCard = ({ item, i, progress, range, targetScale }) => {
 
 export default function CommercialProducing() {
   const containerRef = useRef(null);
-  
+  const navigate = useNavigate();
+
   // Ref for the entire stacked section to track overall progress
-  const stackContainerRef = useRef(null); 
+  const stackContainerRef = useRef(null);
+  
+  // Ref for statement section
+  const statementRef = useRef(null);
 
   const { scrollYProgress: mainScroll } = useScroll({
     target: containerRef,
@@ -71,6 +91,18 @@ export default function CommercialProducing() {
   const introImageScale = useTransform(mainScroll, [0, 0.2], [1.2, 1]);
   const introImageOpacity = useTransform(mainScroll, [0, 0.15, 0.2], [1, 1, 0]);
   const introTextY = useTransform(mainScroll, [0, 0.2], ["0%", "-50%"]);
+
+  // Track the scroll of the statement section separately 
+  const { scrollYProgress: statementProgress } = useScroll({
+    target: statementRef,
+    offset: ["start 90%", "center 40%"]
+  });
+  const statementRotate = useTransform(statementProgress, [0.3, 0.70], [3, 0]);
+  const avatarsOpacity = useTransform(statementProgress, [0.8, 0.95], [0, 1]);
+  const avatarsScale = useTransform(statementProgress, [0.8, 0.95], [0.8, 1]);
+
+  const statementText = "Producing and directing commercial films by building the right team for each brief, driven by cutting-edge aesthetics and cinematic excellence.";
+  const words = statementText.split(/( |\n)/).filter(word => word !== " ");
 
   // Track the scroll of the stack section
   const { scrollYProgress: stackProgress } = useScroll({
@@ -97,28 +129,28 @@ export default function CommercialProducing() {
   ];
 
   return (
-        <div 
-        id="commercial"
-        ref={containerRef} 
-        className="relative bg-[#050505] text-white font-sans scroll-mt-24"
-        >
-            
+    <div
+      id="commercial"
+      ref={containerRef}
+      className="relative bg-[#050505] text-white font-sans scroll-mt-24"
+    >
+
       {/* --- SCENE 1: THE CINEMATIC INTRO --- */}
       <div className="h-[150vh] relative">
         <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-          <motion.div 
+          <motion.div
             style={{ scale: introImageScale, opacity: introImageOpacity }}
             className="absolute inset-0 w-full h-full"
           >
             <div className="absolute inset-0 bg-black/40 z-10" />
-            <img 
-              src="https://images.unsplash.com/photo-1594122230689-45899d9e6f69?q=80&w=2000&auto=format&fit=crop" 
-              alt="Set" 
+            <img
+              src="https://images.unsplash.com/photo-1594122230689-45899d9e6f69?q=80&w=2000&auto=format&fit=crop"
+              alt="Set"
               className="w-full h-full object-cover grayscale opacity-60"
             />
           </motion.div>
 
-          <motion.div 
+          <motion.div
             style={{ y: introTextY }}
             className="relative z-20 mix-blend-difference px-4 text-center pointer-events-none"
           >
@@ -128,6 +160,79 @@ export default function CommercialProducing() {
               <span className="italic font-light lowercase text-[14vw] text-zinc-300">Producing.</span>
             </h1>
           </motion.div>
+        </div>
+      </div>
+
+      {/* --- SCENE 1.5: THE BOLD STATEMENT --- */}
+      <div className="py-24 md:py-48 px-6 md:px-12 bg-[#050505] flex items-center justify-center relative z-40 border-b border-zinc-900">
+        <div ref={statementRef} className="max-w-5xl mx-auto flex flex-col items-center justify-center relative">
+          {/* THE BOLD STATEMENT */}
+          <motion.h2
+            style={{
+              rotate: statementRotate,
+              transformOrigin: "0% 50%"
+            }}
+            className="text-3xl md:text-5xl lg:text-6xl text-white font-serif leading-[1.2] md:leading-[1.1] tracking-tight text-center flex flex-wrap justify-center mb-12"
+          >
+            {words.map((word, i) => {
+              const start = 0.2 + (i * 0.015);
+              const end = start + 0.3;
+
+              let customClass = "";
+              if (word.includes("cutting-edge") || word.includes("aesthetics,")) {
+                customClass = "italic text-zinc-500 font-light";
+              } else if (word.includes("narrative") || word.includes("precision") || word.includes("cinematic")) {
+                customClass = "underline decoration-1 underline-offset-[10px] decoration-zinc-800";
+              }
+
+              return (
+                <BlurWord
+                  key={i}
+                  progress={statementProgress}
+                  range={[start, end]}
+                  className={customClass}
+                >
+                  {word}
+                </BlurWord>
+              );
+            })}
+          </motion.h2>
+
+          {/* --- THE MINIMAL AVATAR PILL --- */}
+          <div className="relative group flex justify-center">
+            <motion.div
+              onClick={() => navigate('/collaborators')}
+              style={{ opacity: avatarsOpacity, scale: avatarsScale }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center bg-[#111] p-1 pr-4 rounded-full border border-zinc-800 cursor-pointer overflow-hidden shadow-lg transition-colors hover:border-zinc-500"
+            >
+              {/* Avatars */}
+              <div className="flex -space-x-3 relative z-10 pl-1">
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150"
+                  alt="Director 1"
+                  className="w-10 h-10 rounded-full border-2 border-[#111] object-cover grayscale"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150"
+                  alt="Director 2"
+                  className="w-10 h-10 rounded-full border-2 border-[#111] object-cover grayscale"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&h=150"
+                  alt="Director 3"
+                  className="w-10 h-10 rounded-full border-2 border-[#111] object-cover grayscale"
+                />
+
+                {/* +20 Badge */}
+                <div className="w-10 h-10 rounded-full bg-white border-2 border-[#111] flex items-center justify-center text-black font-serif text-sm font-bold z-10 shadow-inner">
+                  +20
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          {/* --- END MINIMAL AVATAR PILL --- */}
         </div>
       </div>
 
@@ -143,10 +248,10 @@ export default function CommercialProducing() {
             // Math to calculate when each card should start scaling down
             const targetScale = 1 - ((approaches.length - i) * 0.05);
             return (
-              <StackCard 
-                key={i} 
-                item={item} 
-                i={i} 
+              <StackCard
+                key={i}
+                item={item}
+                i={i}
                 progress={stackProgress}
                 // Range determines when this specific card starts shrinking
                 range={[i * (1 / approaches.length), 1]}
@@ -162,7 +267,7 @@ export default function CommercialProducing() {
       <div className="py-32 md:py-64 px-6 md:px-20 relative bg-[#050505] z-40">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <div className="relative h-[60vh] w-full overflow-hidden rounded-none">
-            <motion.img 
+            <motion.img
               initial={{ y: -50, scale: 1.1 }}
               whileInView={{ y: 0, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}

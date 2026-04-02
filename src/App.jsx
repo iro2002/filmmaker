@@ -6,33 +6,29 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Curve from "./components/Curve";
 import Gallery from "./components/Gallery";
-import Artist from "./components/Artist";
 import Album from "./components/Album";
 import Price from "./components/Price";
 import Footer from "./components/Footer";
 import CommercialProducing from "./components/CommercialProducing";
 import Directing from "./components/Directing";
 import Collaborators from "./components/Collaborators";
-import Category from "./components/Category";
 import Abouth from "./components/Abouth";
 import HouseAndBrand from "./components/HouseAndBrand";
+import JournalSection from "./components/JournalSection";
+import Jurnal from "./components/Jurnal";
+import Article from "./components/Article";
+import ProjectDetails from "./components/ProjectDetails";
 
 // --- HOME PAGE COMPONENT ---
 const Home = () => (
   <>
     <Hero />
-    <Category />
+
     <Abouth />
 
 
     <Curve />
-
-
-
-
-    <Artist />
-
-
+    <JournalSection />
 
     <HouseAndBrand />
 
@@ -58,6 +54,30 @@ const CollaboratorsPage = () => (
   </>
 );
 
+// --- DIRECTING PAGE COMPONENT ---
+const DirectingPage = () => (
+  <>
+    <Directing />
+    <Footer />
+  </>
+);
+
+// --- JOURNAL PAGE COMPONENT ---
+const JournalPage = () => (
+  <>
+    <Jurnal />
+    <Footer />
+  </>
+);
+
+// --- ARTICLE PAGE COMPONENT ---
+const ArticleFullPage = () => (
+  <>
+    <Article />
+    <Footer />
+  </>
+);
+
 // --- MAIN APP COMPONENT ---
 const App = () => {
   return (
@@ -71,6 +91,10 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/commercial-producing" element={<Commercial />} />
         <Route path="/collaborators" element={<CollaboratorsPage />} />
+        <Route path="/directing" element={<DirectingPage />} />
+        <Route path="/journal" element={<JournalPage />} />
+        <Route path="/journal/:slug" element={<ArticleFullPage />} />
+        <Route path="/project/:id" element={<ProjectDetails />} />
       </Routes>
     </div>
   );

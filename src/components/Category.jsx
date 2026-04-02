@@ -13,19 +13,19 @@ const categoriesData = [
         id: 1,
         name: 'Bars',
         video: barVideo,
-        path: '/bar'
+        path: '/directing#hospitality'
     },
     {
         id: 2,
         name: 'Food',
         video: foodVideo,
-        path: '/food'
+        path: '/directing#hospitality'
     },
     {
         id: 3,
         name: 'Promotions',
         video: promotionVideo,
-        path: '/promotion'
+        path: '/directing#hospitality'
     },
     {
         id: 4,
@@ -42,7 +42,19 @@ const Category = () => {
 
     return (
         <div className="w-full bg-[#050505] py-8 md:py-12 flex flex-col items-center justify-center px-4 md:px-8 -mt-6 md:-mt-12 relative z-50">
-            <div
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.1 }}
+                variants={{
+                    visible: {
+                        transition: {
+                            staggerChildren: 0.1,
+                            delayChildren: 0.2
+                        }
+                    },
+                    hidden: {}
+                }}
                 className="flex w-full max-w-6xl h-[300px] md:h-[500px] gap-2 md:gap-4 items-center justify-center cursor-pointer"
                 onMouseLeave={() => setHoveredIndex(null)}
             >
@@ -63,9 +75,10 @@ const Category = () => {
                             key={category.id}
                             onClick={() => navigate(category.path)}
                             onMouseEnter={() => setHoveredIndex(i)}
-                            initial={{ opacity: 0, y: 100 }}
-                            whileInView={{ opacity: 1, y: staggerY }}
-                            viewport={{ once: true, amount: 0.2 }}
+                            variants={{
+                                hidden: { opacity: 0, y: 100 },
+                                visible: { opacity: 1, y: staggerY, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                            }}
                             animate={{
                                 width: cardWidth,
                                 filter: isActive || !isSomethingHovered
@@ -73,8 +86,6 @@ const Category = () => {
                                     : "grayscale(100%) brightness(30%)"
                             }}
                             transition={{
-                                y: { duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] },
-                                opacity: { duration: 0.8, delay: i * 0.1 },
                                 width: { type: "spring", stiffness: 200, damping: 25 },
                                 filter: { duration: 0.3 }
                             }}
@@ -124,7 +135,7 @@ const Category = () => {
                         </motion.div>
                     );
                 })}
-            </div>
+            </motion.div>
         </div>
     );
 };
