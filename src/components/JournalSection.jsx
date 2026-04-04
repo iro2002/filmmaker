@@ -9,7 +9,7 @@ export default function JournalSection() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative w-full min-h-screen bg-[#050505] text-white py-24 md:py-32 select-none z-20">
+    <section className="relative w-full bg-[#050505] text-white pt-24 pb-12 md:pt-32 md:pb-16 select-none z-20">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* Section Header */}
@@ -93,18 +93,6 @@ export default function JournalSection() {
 
             </motion.div>
           ))}
-        </div>
-
-        {/* Navigate to Full Journal Button */}
-        <div className="mt-16 flex justify-center">
-          <button 
-            onClick={() => navigate('/journal')}
-            className="group relative flex items-center justify-center w-40 h-40 md:w-48 md:h-48 rounded-full border border-zinc-700 hover:bg-white hover:text-black transition-colors duration-500 overflow-hidden"
-          >
-            <span className="font-serif text-sm md:text-lg tracking-widest uppercase relative z-10 transition-colors text-center px-4">
-              Explore<br />Journal
-            </span>
-          </button>
         </div>
 
       </div>

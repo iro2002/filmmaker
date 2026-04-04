@@ -18,6 +18,8 @@ import JournalSection from "./components/JournalSection";
 import Jurnal from "./components/Jurnal";
 import Article from "./components/Article";
 import ProjectDetails from "./components/ProjectDetails";
+import Showreels from "./components/Showreels";
+import Process from "./components/Process";
 
 // --- HOME PAGE COMPONENT ---
 const Home = () => (
@@ -28,7 +30,9 @@ const Home = () => (
 
 
     <Curve />
+    <Showreels />
     <JournalSection />
+    <Process />
 
     <HouseAndBrand />
 

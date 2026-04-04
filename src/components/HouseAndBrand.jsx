@@ -37,9 +37,9 @@ const HouseAndBrand = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="text-5xl md:text-7xl font-serif text-white font-light"
+          className="text-5xl md:text-8xl font-serif text-white tracking-tighter"
         >
-          Brands & <span className="italic text-zinc-400">Production Houses</span>
+          Brands & Production Houses
         </motion.h2>
       </div>
 

@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Prevent scrolling when menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isMobileMenuOpen]);
 
   const toggleMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -11,64 +20,44 @@ export default function Header() {
   return (
     <nav className="fixed top-0 w-full z-50 text-white bg-transparent">
       {/* Main Nav Container: 
-        Handles the padding and the flex layout for desktop, 
-        and acts as the top bar for mobile. 
+          - Mobile: bg-transparent (No background)
+          - Desktop: md:bg-transparent (Remains unchanged as per your request)
       */}
-      <div className="flex justify-between items-center p-4 md:p-6 md:px-12 w-full bg-black/80 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none transition-all">
+      <div className="relative z-[70] flex justify-between items-center p-6 md:p-6 md:px-12 w-full bg-transparent transition-all">
 
-        {/* Left: Name leading to Home page */}
+        {/* Left: Name */}
         <div className="flex-1 flex justify-start items-center">
           <Link
             to="/"
-            className="text-base font-medium hover:text-zinc-300 transition-colors whitespace-nowrap"
+            className="text-base font-medium hover:text-zinc-300 transition-colors whitespace-nowrap tracking-tight"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Manthila Balasuriya
           </Link>
         </div>
 
-        {/* Mobile Hamburger Button (Visible only on mobile) */}
+        {/* Mobile Hamburger Button (No background box, just the icon) */}
         <div className="md:hidden flex items-center">
           <button
             onClick={toggleMenu}
-            className="focus:outline-none p-2 hover:text-zinc-300 transition-colors"
+            className="focus:outline-none p-2"
             aria-label="Toggle menu"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {isMobileMenuOpen ? (
-                // "X" Close icon
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                // Hamburger icon
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            <div className="w-6 h-4 flex flex-col justify-between items-end">
+              <span className={`h-[1.5px] bg-white transition-all duration-300 ${isMobileMenuOpen ? "w-6 rotate-45 translate-y-[7px]" : "w-6"}`} />
+              <span className={`h-[1.5px] bg-white transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : "w-4"}`} />
+              <span className={`h-[1.5px] bg-white transition-all duration-300 ${isMobileMenuOpen ? "w-6 -rotate-45 -translate-y-[7px]" : "w-2"}`} />
+            </div>
           </button>
         </div>
 
-        {/* Center: Directing & Producing pages (Hidden on Mobile, Visible on Desktop) */}
+        {/* Center: Desktop Pages (Unchanged) */}
         <div className="hidden md:flex flex-1 justify-center gap-12 items-center text-base">
-          <Link
-            to="/directing"
-            className="hover:text-zinc-300 transition-colors"
-          >
-            Directing
-          </Link>
-          <Link
-            to="/commercial-producing"
-            className="hover:text-zinc-300 transition-colors"
-          >
-            Producing
-          </Link>
+          <Link to="/directing" className="hover:text-zinc-300 transition-colors">Directing</Link>
+          <Link to="/commercial-producing" className="hover:text-zinc-300 transition-colors">Producing</Link>
         </div>
 
-        {/* Right: Leads to Contact Section (Hidden on Mobile, Visible on Desktop) */}
+        {/* Right: Desktop CTA (Unchanged) */}
         <div className="hidden md:flex flex-1 justify-end items-center">
           <a
             href="#contact"
@@ -79,32 +68,42 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown (Visible only when open on Mobile) */}
+      {/* Creative Full-Screen Mobile Menu 
+          This only appears when triggered, otherwise the header is just floating text.
+      */}
       <div
-        className={`md:hidden flex flex-col items-center justify-center bg-black/95 backdrop-blur-md w-full overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? "max-h-64 py-6 border-b border-zinc-800" : "max-h-0"
+        className={`fixed inset-0 bg-black transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
           }`}
       >
-        <Link
-          to="/directing"
-          className="py-3 hover:text-zinc-300 transition-colors text-lg"
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          Directing
-        </Link>
-        <Link
-          to="/commercial-producing"
-          className="py-3 hover:text-zinc-300 transition-colors text-lg"
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          Producing
-        </Link>
-        <a
-          href="#contact"
-          className="mt-4 px-8 py-3 bg-white text-black rounded-full text-sm font-bold hover:bg-zinc-200 transition-colors"
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          Book a call
-        </a>
+        <div className="flex flex-col h-full justify-center px-10 gap-6">
+          <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Navigation</p>
+
+          <Link
+            to="/directing"
+            className={`text-4xl font-light tracking-tight transition-all duration-700 delay-100 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Directing
+          </Link>
+
+          <Link
+            to="/commercial-producing"
+            className={`text-4xl font-light tracking-tight transition-all duration-700 delay-200 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Producing
+          </Link>
+
+          <div className={`mt-6 transition-all duration-700 delay-300 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
+            <a
+              href="#contact"
+              className="text-lg border-b border-white pb-1 inline-block"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Book a call
+            </a>
+          </div>
+        </div>
       </div>
     </nav>
   );

@@ -147,16 +147,14 @@ export default function Jurnal() {
         )}
       </div>
 
-      {/* Load More Button matching Directing container style */}
+      {/* Load More Button matching generic simple style */}
       {visibleCount < currentArticles.length && (
         <div className="mt-20 flex justify-center w-full relative z-10 px-4">
           <button
             onClick={() => setVisibleCount(prev => prev + 6)}
-            className="group relative flex items-center justify-center w-40 h-40 md:w-48 md:h-48 rounded-full border border-zinc-700 hover:bg-white hover:text-black transition-colors duration-500 overflow-hidden bg-black/20 backdrop-blur-sm"
+            className="px-8 py-3 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 font-serif tracking-widest text-sm uppercase"
           >
-            <span className="font-serif text-sm md:text-lg tracking-widest uppercase relative z-10 transition-colors text-center px-4">
-              Load<br />More
-            </span>
+            Load More
           </button>
         </div>
       )}
