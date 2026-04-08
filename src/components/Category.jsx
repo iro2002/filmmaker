@@ -52,7 +52,7 @@ const Category = () => {
                     viewport={{ once: true }}
                     className="text-white text-5xl md:text-7xl font-serif tracking-tighter mb-2"
                 >
-                    Featured products
+                    Featured Work
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
