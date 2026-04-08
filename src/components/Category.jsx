@@ -123,19 +123,18 @@ const Category = () => {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
                             </div>
 
-                            {/* UNIFIED TEXT (Shows on both Mobile and Desktop) */}
-                            <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-6 lg:p-10 pointer-events-none z-10">
-                                <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                            {/* UNIFIED TEXT (Shows vertical on Mobile, horizontal on Desktop) */}
+                            <div className="absolute inset-0 flex flex-col justify-center md:justify-end items-center md:items-start p-0 md:p-6 lg:p-10 pointer-events-none z-10">
+                                <div className="transform md:translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out flex flex-row md:flex-col items-center md:items-start -rotate-90 md:rotate-0 origin-center">
 
-                                    <span className="block text-zinc-400 font-sans text-xs md:text-sm tracking-[0.2em] mb-2 md:mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                                        0{category.id}
-                                    </span>
 
-                                    <h3 className="text-white/70 group-hover:text-white font-serif text-lg md:text-2xl lg:text-3xl tracking-wider lg:tracking-widest drop-shadow-2xl whitespace-normal break-words leading-tight transition-colors duration-500">
+
+                                    <h3 className="text-white/90 group-hover:text-white font-serif text-lg md:text-2xl lg:text-3xl tracking-widest drop-shadow-2xl whitespace-nowrap md:whitespace-normal break-words leading-tight transition-colors duration-500">
                                         {category.name}
                                     </h3>
 
-                                    <div className="w-0 group-hover:w-16 h-[2px] bg-white mt-3 md:mt-4 transition-all duration-700 delay-150 ease-out" />
+                                    {/* Line hidden on mobile to preserve vertical design */}
+                                    <div className="hidden md:block w-0 group-hover:w-16 h-[2px] bg-white mt-3 md:mt-4 transition-all duration-700 delay-150 ease-out" />
                                 </div>
                             </div>
 
@@ -148,38 +147,38 @@ const Category = () => {
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                // The negative bottom margin helps trigger the animation earlier on mobile
                 viewport={{ once: true, margin: "0px 0px -50px 0px" }}
                 transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-                className="w-full max-w-[1400px] mt-10 md:mt-12 flex justify-center md:justify-end px-4 md:px-0 z-10"
+                className="w-full max-w-[1400px] mt-8 md:mt-12 flex justify-center md:justify-end px-4 md:px-8 z-10"
             >
                 <div
                     onClick={() => navigate('/directing')}
-                    className="group cursor-pointer flex items-center gap-4 relative"
+                    className="group cursor-pointer flex items-center gap-3 md:gap-4 relative"
                 >
-                    <span className="font-serif text-3xl md:text-4xl text-zinc-400 group-hover:text-white transition-colors duration-500 tracking-wide italic font-light drop-shadow-2xl">
+                    <span className="font-serif text-2xl md:text-4xl text-zinc-400 group-hover:text-white transition-colors duration-500 tracking-wide italic font-light drop-shadow-2xl">
                         Discover all
                     </span>
 
-                    <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/20 group-hover:border-white/60 bg-black/40 backdrop-blur-md flex items-center justify-center overflow-hidden transition-colors duration-500">
+                    <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 group-hover:border-white/60 bg-black/40 backdrop-blur-md flex items-center justify-center overflow-hidden transition-colors duration-500">
                         <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1]" />
 
                         <svg
-                            className="absolute w-6 h-6 text-white group-hover:text-black group-hover:translate-x-[150%] group-hover:-translate-y-[150%] transition-transform duration-500 ease-[0.22,1,0.36,1] rotate-[-45deg]"
+                            className="absolute w-5 h-5 md:w-6 md:h-6 text-white group-hover:text-black group-hover:translate-x-[150%] group-hover:-translate-y-[150%] transition-transform duration-500 ease-[0.22,1,0.36,1] rotate-[-45deg]"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor"
                         >
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
 
                         <svg
-                            className="absolute w-6 h-6 text-black -translate-x-[150%] translate-y-[150%] group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1] rotate-[-45deg]"
+                            className="absolute w-5 h-5 md:w-6 md:h-6 text-black -translate-x-[150%] translate-y-[150%] group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1] rotate-[-45deg]"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor"
                         >
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                     </div>
 
-                    <div className="absolute bottom-2 md:bottom-3 left-0 w-[calc(100%-70px)] md:w-[calc(100%-80px)] h-[1px] bg-white/20 pointer-events-none">
+                    {/* Adjusted calculations to properly size underline based on mobile gap + circle sizing */}
+                    <div className="absolute -bottom-1 md:bottom-2 left-0 w-[calc(100%-60px)] md:w-[calc(100%-80px)] h-[1px] bg-white/20 pointer-events-none">
                         <div className="absolute left-0 top-0 h-full bg-white w-0 group-hover:w-full transition-all duration-700 ease-[0.22,1,0.36,1]" />
                     </div>
                 </div>
