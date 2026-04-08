@@ -27,8 +27,6 @@ const Process = () => {
                     {steps.map((step, index) => (
                         <div key={index} className="flex flex-col items-center text-center flex-1 relative w-full">
 
-
-
                             {/* Title */}
                             <motion.h3 className="text-xl md:text-2xl font-serif text-white mb-6 md:mb-10 z-10">
                                 {step.title}
@@ -101,9 +99,9 @@ const Process = () => {
             {/* CTA */}
             <motion.a
                 href="#contact"
-                className="mt-24 md:mt-40 px-8 py-3 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 font-serif tracking-widest text-sm uppercase"
+                className="mt-12 md:mt-20 px-8 py-3 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 font-serif tracking-widest text-sm uppercase"
             >
-                Get in touch
+                START A PROJECT
             </motion.a>
         </section>
     );

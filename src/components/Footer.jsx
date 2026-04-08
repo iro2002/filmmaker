@@ -73,15 +73,24 @@ export default function Footer() {
           </h2>
           <a
             href="mailto:manthilaproduces@gmail.com"
-            className="group relative text-lg font-light tracking-wide inline-block"
+            className="group relative text-lg font-light tracking-wide inline-block mb-8"
           >
             manthilaproduces@gmail.com
             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-500 group-hover:w-full"></span>
           </a>
+
+          {/* NEW: Book a Call Button */}
+          <a
+            href="#book"
+            className="px-8 py-3 rounded-full border border-white text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300"
+          >
+            Book a Call
+          </a>
         </div>
 
         {/* Right Column: Always-Active Rotating Badge */}
-        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24">
+        {/* UPDATED: Increased gap-24 to gap-40 and lg:gap-56 to push the circle to the left */}
+        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-40 lg:gap-56">
 
           {/* START CIRCLE UPDATES: 
             - Always white border and text so it stands out immediately 

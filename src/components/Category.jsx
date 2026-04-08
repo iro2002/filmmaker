@@ -10,27 +10,28 @@ import viewAllImage from '../images/viewall.jpg';
 const categoriesData = [
     {
         id: 1,
-        name: 'Bars',
+        name: 'Bars & Nightlife',
         video: barVideo,
         path: '/directing#hospitality'
     },
     {
         id: 2,
-        name: 'Food',
+        name: 'Food & Dining',
         video: foodVideo,
         path: '/directing#hospitality'
     },
     {
         id: 3,
-        name: 'Promotions',
+        name: 'Campaigns',
         video: promotionVideo,
         path: '/directing#hospitality'
     },
     {
         id: 4,
-        name: 'View All',
+        name: 'Discover All',
         isViewAll: true,
         image: viewAllImage,
+        video: promotionVideo,
         path: '/directing'
     }
 ];
@@ -62,7 +63,7 @@ const Category = () => {
                     transition={{ delay: 0.1 }}
                     className="text-zinc-400 text-sm md:text-base max-w-lg mx-auto"
                 >
-                    Select a category below to discover our crafted experiences.
+                    Discover a curated selection of cinematic stories.
                 </motion.p>
             </div>
 
@@ -128,32 +129,32 @@ const Category = () => {
                             </div>
 
                             {/* ============================================== */}
-                            {/* MOBILE TEXT (Kept exactly as your original) */}
+                            {/* MOBILE TEXT */}
                             {/* ============================================== */}
-                            <div className="absolute inset-0 flex items-center justify-center md:hidden pointer-events-none">
-                                <p className="text-white font-serif text-2xl tracking-[0.3em] drop-shadow-2xl whitespace-nowrap [writing-mode:vertical-rl] rotate-180">
+                            <div className="absolute inset-0 flex items-center justify-center md:hidden pointer-events-none px-2">
+                                <p className="text-white font-serif text-lg sm:text-xl tracking-[0.15em] drop-shadow-2xl whitespace-nowrap [writing-mode:vertical-rl] rotate-180">
                                     {category.name}
                                 </p>
                             </div>
 
                             {/* ============================================== */}
-                            {/* DESKTOP TEXT (New Modern Horizontal Layout) */}
+                            {/* DESKTOP TEXT (Fixed Wrapping & Sizing) */}
                             {/* ============================================== */}
-                            <div className="hidden md:flex absolute inset-0 flex-col justify-end p-8 lg:p-12 pointer-events-none z-10">
+                            <div className="hidden md:flex absolute inset-0 flex-col justify-end p-6 lg:p-10 pointer-events-none z-10">
                                 <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
 
-                                    {/* Number indicator for a premium editorial feel */}
-                                    <span className="block text-zinc-400 font-sans text-sm tracking-[0.2em] mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                    {/* Number indicator */}
+                                    <span className="block text-zinc-400 font-sans text-xs lg:text-sm tracking-[0.2em] mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                                         0{category.id}
                                     </span>
 
-                                    {/* Main Title */}
-                                    <h3 className="text-white/70 group-hover:text-white font-serif text-3xl lg:text-4xl tracking-widest drop-shadow-2xl whitespace-nowrap transition-colors duration-500">
+                                    {/* Main Title - Removed whitespace-nowrap, adjusted sizes */}
+                                    <h3 className="text-white/70 group-hover:text-white font-serif text-2xl lg:text-3xl xl:text-4xl tracking-wider lg:tracking-widest drop-shadow-2xl transition-all duration-500 leading-tight">
                                         {category.name}
                                     </h3>
 
                                     {/* Animated Underline */}
-                                    <div className="w-0 group-hover:w-16 h-[2px] bg-white mt-5 transition-all duration-700 delay-150 ease-out" />
+                                    <div className="w-0 group-hover:w-16 h-[2px] bg-white mt-4 transition-all duration-700 delay-150 ease-out" />
                                 </div>
                             </div>
 

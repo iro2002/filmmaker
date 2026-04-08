@@ -16,6 +16,7 @@ import Abouth from "./components/Abouth";
 import HouseAndBrand from "./components/HouseAndBrand";
 import JournalSection from "./components/JournalSection";
 import Jurnal from "./components/Jurnal";
+import ChatBox from "./components/ChatBox";
 import Article from "./components/Article";
 import ProjectDetails from "./components/ProjectDetails";
 import Showreels from "./components/Showreels";
@@ -31,12 +32,13 @@ const Home = () => (
 
     <Curve />
     <Showreels />
-    <JournalSection />
-    <Process />
-
     <HouseAndBrand />
 
+    <Process />
+
+
     <Price />
+   <JournalSection />
 
     <Footer />
   </>
@@ -100,6 +102,7 @@ const App = () => {
         <Route path="/journal/:slug" element={<ArticleFullPage />} />
         <Route path="/project/:id" element={<ProjectDetails />} />
       </Routes>
+      <ChatBox />
     </div>
   );
 };
