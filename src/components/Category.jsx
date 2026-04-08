@@ -28,11 +28,9 @@ const categoriesData = [
     },
     {
         id: 4,
-        name: 'Discover All',
-        isViewAll: true,
-        image: viewAllImage,
+        name: 'Spaces',
         video: promotionVideo,
-        path: '/directing'
+        path: '/directing#hospitality'
     }
 ];
 
@@ -41,18 +39,18 @@ const Category = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="relative w-full bg-[#050505] py-16 md:py-12 flex flex-col items-center justify-center px-2 md:px-8 overflow-hidden z-50">
+        <div className="relative w-full bg-[#050505] py-10 md:py-8 flex flex-col items-center justify-center px-0 md:px-0 overflow-hidden z-50">
 
             {/* Subtle background glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-96 bg-zinc-800/20 rounded-full blur-[100px] pointer-events-none" />
 
             {/* Header Section */}
-            <div className="text-center mb-12 md:mb-10 z-10 px-4">
+            <div className="text-center mb-8 md:mb-6 z-10 px-4">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-white text-5xl md:text-8xl font-serif tracking-tighter mb-3"
+                    className="text-white text-5xl md:text-7xl font-serif tracking-tighter mb-2"
                 >
                     Featured products
                 </motion.h2>
@@ -76,15 +74,14 @@ const Category = () => {
                     visible: { transition: { staggerChildren: 0.15 } },
                     hidden: {}
                 }}
-                className="flex w-full max-w-[1400px] gap-2 md:gap-5 items-center justify-center cursor-pointer"
+                className="flex w-full gap-2 md:gap-5 items-center justify-center cursor-pointer"
                 onMouseLeave={() => setHoveredIndex(null)}
             >
                 {categoriesData.map((category, i) => {
                     const isHovered = hoveredIndex === i;
                     const isSomethingHovered = hoveredIndex !== null;
 
-                    // Stagger effect for mobile primarily
-                    const staggerY = i % 2 === 0 ? 20 : -20;
+                    const staggerY = i % 2 === 0 ? 15 : -15;
 
                     return (
                         <motion.div
@@ -92,7 +89,7 @@ const Category = () => {
                             onClick={() => navigate(category.path)}
                             onMouseEnter={() => setHoveredIndex(i)}
                             variants={{
-                                hidden: { opacity: 0, y: 50 },
+                                hidden: { opacity: 0, y: 30 },
                                 visible: { opacity: 1, y: staggerY, transition: { duration: 0.8, ease: "easeOut" } }
                             }}
                             animate={{
@@ -102,8 +99,7 @@ const Category = () => {
                                     : "grayscale(100%) brightness(30%)"
                             }}
                             transition={{ duration: 0.4 }}
-                            // NEW DESKTOP LAYOUT: Expanding Accordion Flex Effect
-                            className="relative overflow-hidden bg-[#111] border border-zinc-800/80 group rounded-none shadow-2xl flex-1 h-[550px] md:h-[60vh] md:min-h-[400px] md:max-h-[600px] md:transition-all md:duration-700 md:ease-out md:hover:[flex:2_2_0%]"
+                            className="relative overflow-hidden bg-[#111] border border-zinc-800/80 group rounded-none shadow-2xl flex-1 h-[450px] md:h-[50vh] md:min-h-[320px] md:max-h-[500px] md:transition-all md:duration-700 md:ease-out md:hover:[flex:2_2_0%]"
                         >
 
                             {/* Media Wrapper */}
@@ -124,43 +120,69 @@ const Category = () => {
                                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                     />
                                 )}
-                                {/* Gradient Overlay - darker at the bottom to ensure text pops */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
                             </div>
 
-                            {/* ============================================== */}
-                            {/* MOBILE TEXT */}
-                            {/* ============================================== */}
-                            <div className="absolute inset-0 flex items-center justify-center md:hidden pointer-events-none px-2">
-                                <p className="text-white font-serif text-lg sm:text-xl tracking-[0.15em] drop-shadow-2xl whitespace-nowrap [writing-mode:vertical-rl] rotate-180">
-                                    {category.name}
-                                </p>
-                            </div>
-
-                            {/* ============================================== */}
-                            {/* DESKTOP TEXT (Fixed Wrapping & Sizing) */}
-                            {/* ============================================== */}
-                            <div className="hidden md:flex absolute inset-0 flex-col justify-end p-6 lg:p-10 pointer-events-none z-10">
+                            {/* UNIFIED TEXT (Shows on both Mobile and Desktop) */}
+                            <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-6 lg:p-10 pointer-events-none z-10">
                                 <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
 
-                                    {/* Number indicator */}
-                                    <span className="block text-zinc-400 font-sans text-xs lg:text-sm tracking-[0.2em] mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                    <span className="block text-zinc-400 font-sans text-xs md:text-sm tracking-[0.2em] mb-2 md:mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                                         0{category.id}
                                     </span>
 
-                                    {/* Main Title - Removed whitespace-nowrap, adjusted sizes */}
-                                    <h3 className="text-white/70 group-hover:text-white font-serif text-2xl lg:text-3xl xl:text-4xl tracking-wider lg:tracking-widest drop-shadow-2xl transition-all duration-500 leading-tight">
+                                    <h3 className="text-white/70 group-hover:text-white font-serif text-lg md:text-2xl lg:text-3xl tracking-wider lg:tracking-widest drop-shadow-2xl whitespace-normal break-words leading-tight transition-colors duration-500">
                                         {category.name}
                                     </h3>
 
-                                    {/* Animated Underline */}
-                                    <div className="w-0 group-hover:w-16 h-[2px] bg-white mt-4 transition-all duration-700 delay-150 ease-out" />
+                                    <div className="w-0 group-hover:w-16 h-[2px] bg-white mt-3 md:mt-4 transition-all duration-700 delay-150 ease-out" />
                                 </div>
                             </div>
 
                         </motion.div>
                     );
                 })}
+            </motion.div>
+
+            {/* Discover All Link */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                // The negative bottom margin helps trigger the animation earlier on mobile
+                viewport={{ once: true, margin: "0px 0px -50px 0px" }}
+                transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+                className="w-full max-w-[1400px] mt-10 md:mt-12 flex justify-center md:justify-end px-4 md:px-0 z-10"
+            >
+                <div
+                    onClick={() => navigate('/directing')}
+                    className="group cursor-pointer flex items-center gap-4 relative"
+                >
+                    <span className="font-serif text-3xl md:text-4xl text-zinc-400 group-hover:text-white transition-colors duration-500 tracking-wide italic font-light drop-shadow-2xl">
+                        Discover all
+                    </span>
+
+                    <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/20 group-hover:border-white/60 bg-black/40 backdrop-blur-md flex items-center justify-center overflow-hidden transition-colors duration-500">
+                        <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1]" />
+
+                        <svg
+                            className="absolute w-6 h-6 text-white group-hover:text-black group-hover:translate-x-[150%] group-hover:-translate-y-[150%] transition-transform duration-500 ease-[0.22,1,0.36,1] rotate-[-45deg]"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+
+                        <svg
+                            className="absolute w-6 h-6 text-black -translate-x-[150%] translate-y-[150%] group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1] rotate-[-45deg]"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </div>
+
+                    <div className="absolute bottom-2 md:bottom-3 left-0 w-[calc(100%-70px)] md:w-[calc(100%-80px)] h-[1px] bg-white/20 pointer-events-none">
+                        <div className="absolute left-0 top-0 h-full bg-white w-0 group-hover:w-full transition-all duration-700 ease-[0.22,1,0.36,1]" />
+                    </div>
+                </div>
             </motion.div>
         </div>
     );
