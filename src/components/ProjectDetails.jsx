@@ -72,6 +72,15 @@ export default function ProjectDetails() {
                             allowFullScreen
                             title={selectedVideo.title}
                         ></iframe>
+                    ) : selectedVideo.youtubeId ? (
+                        <iframe
+                            src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1&rel=0`}
+                            className="w-full h-full"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                            title={selectedVideo.title}
+                        ></iframe>
                     ) : (
                         <video
                             src={selectedVideo.src}

@@ -11,10 +11,12 @@ import promotionVideo from '../images/promotion.mp4';
 const fallbackVideo = "https://www.w3schools.com/html/mov_bbb.mp4";
 import { hospitalityVideos } from '../data/hospitalityData';
 import { corporateVideos } from '../data/corporateData';
+import { fashionFilmsVideos } from '../data/fashionFilmsData';
+import { musicVideos } from '../data/musicVideoData';
 
 export const categories = [
     { id: 'hospitality', name: 'Hospitality' },
-    { id: 'commercial', name: 'Commercial' },
+    { id: 'fashion-films', name: 'Fashion Films' },
   
     { id: 'corporate', name: 'Corporate' },
     { id: 'events', name: 'Events' },
@@ -23,21 +25,14 @@ export const categories = [
 ];
 
 export const allVideos = {
-    'commercial': [
-        { id: 'c1', title: 'Ad Campaign A', src: fallbackVideo, details: 'A wide-reaching commercial broadcast focused on conveying the brand message elegantly.', projectType: 'Commercial', date: 'October 2023', role: 'Director', client: 'Brand X', productionHouse: 'Studio Y' },
-        { id: 'c2', title: 'Ad Campaign B', src: fallbackVideo, details: 'Dynamic product showcase emphasizing high production value and seamless transitions.', projectType: 'TV Commercial', date: 'August 2023', role: 'Director / Editor', client: 'Global Tech', productionHouse: 'Oasis Films' },
-        { id: 'c3', title: 'Brand Story', src: fallbackVideo, details: 'Story-driven brand commercial that touches on emotional connections and authentic moments.', projectType: 'Digital Ad', date: 'January 2024', role: 'Director', client: 'Lifestyle Co.', productionHouse: 'Nomad Studios' },
-    ],
+    'fashion-films': fashionFilmsVideos,
     'hospitality': hospitalityVideos,
     'corporate': corporateVideos,
     'events': [
         { id: 'e1', title: 'Live Concert 2025', src: fallbackVideo, details: 'Multi-cam setup for a grand live event capturing the energy and scale of the performance.', projectType: 'Event Coverage', date: 'New Year 2024', role: 'Live Director', client: 'Music Festival', productionHouse: 'LiveStream Pro' },
         { id: 'e2', title: 'Fashion Week', src: fallbackVideo, details: 'Runway coverage and backstage highlights showcasing fashion in motion and lighting design.', projectType: 'Event Recap', date: 'Fall 2023', role: 'Camera Operator', client: 'Vogue Variations', productionHouse: 'Style Films' }
     ],
-    'music-videos': [
-        { id: 'm1', title: 'Neon Dreams', src: fallbackVideo, details: 'Music video featuring vibrant neon aesthetics and a narrative deeply woven into the lyrical themes.', projectType: 'Music Video', date: 'July 2023', role: 'Director', client: 'Indie Record Label', productionHouse: 'Neon Studios' },
-        { id: 'm2', title: 'Acoustic Sessions', src: fallbackVideo, details: 'Intimate, close-up performance capture prioritizing raw audio quality and minimal distraction.', projectType: 'Live Session', date: 'May 2023', role: 'Director / Colorist', client: 'Acoustic Artist', productionHouse: 'Sound Stage' }
-    ],
+    'music-videos': musicVideos,
     'personal-films': [
         { id: 'p1', title: 'The Journey', src: fallbackVideo, details: 'A short documentary exploring human connections across different cultures and environments.', projectType: 'Short Documentary', date: '2022', role: 'Director / Producer', client: 'Independent', productionHouse: 'Self-Funded' },
         { id: 'p2', title: 'Quiet Mornings', src: fallbackVideo, details: 'A study on stillness and early morning routines through soft natural light cinematography.', projectType: 'Art Film', date: '2024', role: 'Cinematographer', client: 'Personal Project', productionHouse: 'N/A' }
@@ -48,8 +43,8 @@ export default function Directing() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // Default to commercial, or read hash
-    const [activeCategory, setActiveCategory] = useState('commercial');
+    // Default to fashion-films, or read hash
+    const [activeCategory, setActiveCategory] = useState('fashion-films');
 
     // Sync state from URL hash and reset scroll position
     useEffect(() => {
@@ -132,7 +127,7 @@ export default function Directing() {
                                 className="group relative aspect-video cursor-pointer overflow-hidden bg-black"
                                 onClick={() => navigate(`/project/${video.id}`)}
                             >
-                                {video.vimeoId ? (
+                                {video.vimeoId || video.youtubeId ? (
                                     <img
                                         src={video.thumbnail || "https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&q=80"}
                                         alt={video.title}

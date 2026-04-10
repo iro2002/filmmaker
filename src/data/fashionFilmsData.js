@@ -1,0 +1,58 @@
+export const fashionFilmsVideos = [
+  {
+    "id": "f1",
+    "vimeoId": "1152424146",
+    "vimeoHash": "b5d67b6ae7",
+    "title": "Gal Bora \"For Her\" Campaign",
+    "date": "2025 December",
+    "role": "Director",
+    "dop": "Kalindu Kariyawasam",
+    "client": "Gal Bora",
+    "productionHouse": "Viral Media LK",
+    "details": "This campaign film for Gal Bora adopts a portrait-based approach, featuring women in a range of everyday scenarios without a fixed narrative structure. The focus lies in evoking emotion through composition, lighting, and performance, while the jewellery is presented subtly through natural movement and interaction. Designed for fashion and lifestyle branding, the film emphasizes authenticity, elegance, and understated product storytelling.",
+    "projectType": "Fashion Films",
+    "thumbnail": "https://i.vimeocdn.com/video/2103991085-2ce83a045ef29d18027bea26888e3dd889e4ee58aa99c2a5211c6c2f39ae56f9-d_1280x720?region=us"
+  },
+  {
+    "id": "f2",
+    "vimeoId": "1152424096",
+    "vimeoHash": "0f820d3846",
+    "title": "Gal Bora \"For Her\" Campaign (Part 2)",
+    "date": "2025 December",
+    "role": "Director",
+    "dop": "Kalindu Kariyawasam",
+    "client": "Gal Bora",
+    "productionHouse": "Viral Media LK",
+    "details": "This campaign film for Gal Bora adopts a portrait-based approach, featuring women in a range of everyday scenarios without a fixed narrative structure. The focus lies in evoking emotion through composition, lighting, and performance, while the jewellery is presented subtly through natural movement and interaction. Designed for fashion and lifestyle branding, the film emphasizes authenticity, elegance, and understated product storytelling.",
+    "projectType": "Fashion Films",
+    "thumbnail": "https://i.vimeocdn.com/video/2103990905-168ca45cfed7d344773d9d6acef417513c41cd3d2c5c08d76e9975f352d564b9-d_1280x720?region=us"
+  },
+  {
+    "id": "f3",
+    "vimeoId": "1152424048",
+    "vimeoHash": "48df98f199",
+    "title": "Gal Bora \"For Her\" Campaign (Part 3)",
+    "date": "2025 December",
+    "role": "Director",
+    "dop": "Kalindu Kariyawasam",
+    "client": "Gal Bora",
+    "productionHouse": "Viral Media LK",
+    "details": "This campaign film for Gal Bora adopts a portrait-based approach, featuring women in a range of everyday scenarios without a fixed narrative structure. The focus lies in evoking emotion through composition, lighting, and performance, while the jewellery is presented subtly through natural movement and interaction. Designed for fashion and lifestyle branding, the film emphasizes authenticity, elegance, and understated product storytelling.",
+    "projectType": "Fashion Films",
+    "thumbnail": "https://i.vimeocdn.com/video/2103990730-0be932be65d347d4ab04e88d699b9b06c3f91f2ebd6333eb5128ab64b67f262f-d_1280x720?region=us"
+  },
+  {
+    "id": "f4",
+    "vimeoId": "1151540377",
+    "vimeoHash": "0c35d73974",
+    "title": "Gal Bora \"For Her\" Campaign (Part 4)",
+    "date": "2025 December",
+    "role": "Director",
+    "dop": "Kalindu Kariyawasam",
+    "client": "Gal Bora",
+    "productionHouse": "Viral Media LK",
+    "details": "This campaign film for Gal Bora adopts a portrait-based approach, featuring women in a range of everyday scenarios without a fixed narrative structure. The focus lies in evoking emotion through composition, lighting, and performance, while the jewellery is presented subtly through natural movement and interaction. Designed for fashion and lifestyle branding, the film emphasizes authenticity, elegance, and understated product storytelling.",
+    "projectType": "Fashion Films",
+    "thumbnail": "https://i.vimeocdn.com/video/2102771347-e8b9d3e6e60710af34f19cd6bc3558f02f31008e81574204a908c43301cd9891-d_1280x720?region=us"
+  }
+];
