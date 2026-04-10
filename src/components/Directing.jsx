@@ -9,10 +9,13 @@ import promotionVideo from '../images/promotion.mp4';
 
 // Extremely reliable fallback video 
 const fallbackVideo = "https://www.w3schools.com/html/mov_bbb.mp4";
+import { hospitalityVideos } from '../data/hospitalityData';
+import { corporateVideos } from '../data/corporateData';
 
 export const categories = [
-    { id: 'commercial', name: 'Commercial' },
     { id: 'hospitality', name: 'Hospitality' },
+    { id: 'commercial', name: 'Commercial' },
+  
     { id: 'corporate', name: 'Corporate' },
     { id: 'events', name: 'Events' },
     { id: 'music-videos', name: 'Music Videos' },
@@ -25,15 +28,8 @@ export const allVideos = {
         { id: 'c2', title: 'Ad Campaign B', src: fallbackVideo, details: 'Dynamic product showcase emphasizing high production value and seamless transitions.', projectType: 'TV Commercial', date: 'August 2023', role: 'Director / Editor', client: 'Global Tech', productionHouse: 'Oasis Films' },
         { id: 'c3', title: 'Brand Story', src: fallbackVideo, details: 'Story-driven brand commercial that touches on emotional connections and authentic moments.', projectType: 'Digital Ad', date: 'January 2024', role: 'Director', client: 'Lifestyle Co.', productionHouse: 'Nomad Studios' },
     ],
-    'hospitality': [
-        { id: 'h1', title: 'Bars & Nightlife', src: barVideo, details: 'Capturing the mood and atmosphere of luxury bars. Detailed sound design and ambient lighting emphasize the premium feel of the night time economy.', projectType: 'Promo Video', date: 'March 2024', role: 'Director of Photography', client: 'The Vault', productionHouse: 'Creative Hub' },
-        { id: 'h2', title: 'Culinary Experience', src: foodVideo, details: 'Slow-motion food cinematography showing the art of culinary prep and the vibrant presentation of luxury dining.', projectType: 'Social Media Campaign', date: 'December 2023', role: 'Director', client: 'Michelin Star Dining', productionHouse: 'Foodie Films' },
-        { id: 'h3', title: 'Seasonal Promotions', src: promotionVideo, details: 'Dynamic promotional cuts for lifestyle and hospitality brands to drive seasonal engagement and excitement.', projectType: 'Seasonal Ad', date: 'Summer 2023', role: 'Editor', client: 'Resort Group', productionHouse: 'In-House' }
-    ],
-    'corporate': [
-        { id: 'co1', title: 'Tech Innovation Profile', src: fallbackVideo, details: 'Corporate profile for a leading tech firm highlighting their journey and cutting-edge facilities.', projectType: 'Corporate Documentary', date: 'September 2023', role: 'Director', client: 'TechCorp', productionHouse: 'Visionary Media' },
-        { id: 'co2', title: 'Company Culture', src: fallbackVideo, details: 'Highlighting the human element of corporate life to attract top talent and maintain brand synergy.', projectType: 'Internal Video', date: 'February 2024', role: 'Cinematographer', client: 'Finance Plus', productionHouse: 'Visionary Media' }
-    ],
+    'hospitality': hospitalityVideos,
+    'corporate': corporateVideos,
     'events': [
         { id: 'e1', title: 'Live Concert 2025', src: fallbackVideo, details: 'Multi-cam setup for a grand live event capturing the energy and scale of the performance.', projectType: 'Event Coverage', date: 'New Year 2024', role: 'Live Director', client: 'Music Festival', productionHouse: 'LiveStream Pro' },
         { id: 'e2', title: 'Fashion Week', src: fallbackVideo, details: 'Runway coverage and backstage highlights showcasing fashion in motion and lighting design.', projectType: 'Event Recap', date: 'Fall 2023', role: 'Camera Operator', client: 'Vogue Variations', productionHouse: 'Style Films' }
@@ -136,14 +132,22 @@ export default function Directing() {
                                 className="group relative aspect-video cursor-pointer overflow-hidden bg-black"
                                 onClick={() => navigate(`/project/${video.id}`)}
                             >
-                                <video
-                                    src={video.src}
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                    className="w-full h-full object-cover grayscale-[30%] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
-                                />
+                                {video.vimeoId ? (
+                                    <img
+                                        src={video.thumbnail || "https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&q=80"}
+                                        alt={video.title}
+                                        className="w-full h-full object-cover grayscale-[30%] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
+                                    />
+                                ) : (
+                                    <video
+                                        src={video.src}
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="w-full h-full object-cover grayscale-[30%] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
+                                    />
+                                )}
                                 {/* Dark overlay that fades on hover */}
                                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500" />
 

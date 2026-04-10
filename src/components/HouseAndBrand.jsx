@@ -8,16 +8,22 @@ import b3 from '../images/Brands/l-3.jpeg';
 import b4 from '../images/Brands/l-4.jpeg';
 import b6 from '../images/Brands/l-6.png';
 import b8 from '../images/Brands/l-8.png';
+import b9 from '../images/Brands/l-9.png';
 
 // --- PRODUCTION HOUSE IMAGES ---
 import p11 from '../images/ProductionHouse/p-1-1.png';
 import p1 from '../images/ProductionHouse/p-1.png';
 import p2 from '../images/ProductionHouse/p-2.png';
 import p3 from '../images/ProductionHouse/p-3.jpeg';
+import p4 from '../images/ProductionHouse/p-4.png';
+import p5 from '../images/ProductionHouse/p-5.png';
+import p6 from '../images/ProductionHouse/p-6.png';
+import p7 from '../images/ProductionHouse/p-7.png';
+
 
 const HouseAndBrand = () => {
-  const brands = [b1, b2, b3, b4, b6, b8];
-  const productionHouses = [p11, p1, p2, p3];
+  const brands = [b1, b2, b3, b4, b6, b8, b9];
+  const productionHouses = [p11, p1, p2, p3, p4, p5, p6, p7];
 
   return (
     <section className="w-full bg-[#050505] py-20 md:py-32 overflow-hidden relative z-10">

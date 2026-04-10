@@ -63,12 +63,23 @@ export default function ProjectDetails() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="w-full aspect-video bg-black rounded-sm overflow-hidden mb-12 shadow-[0_0_40px_rgba(0,0,0,0.8)] border border-white/5"
                 >
-                    <video
-                        src={selectedVideo.src}
-                        controls
-                        autoPlay
-                        className="w-full h-full object-contain"
-                    />
+                    {selectedVideo.vimeoId ? (
+                        <iframe
+                            src={`https://player.vimeo.com/video/${selectedVideo.vimeoId}?h=${selectedVideo.vimeoHash}&autoplay=1&title=0&byline=0&portrait=0`}
+                            className="w-full h-full"
+                            frameBorder="0"
+                            allow="autoplay; fullscreen; picture-in-picture"
+                            allowFullScreen
+                            title={selectedVideo.title}
+                        ></iframe>
+                    ) : (
+                        <video
+                            src={selectedVideo.src}
+                            controls
+                            autoPlay
+                            className="w-full h-full object-contain"
+                        />
+                    )}
                 </motion.div>
 
                 {/* Details Section */}
