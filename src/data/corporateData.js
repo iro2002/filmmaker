@@ -3,7 +3,7 @@ export const corporateVideos = [
     "id": "co4",
     "vimeoId": "1127774900",
     "vimeoHash": "",
-    "title": "DHL 45th Anniversary Film",
+    "title": "DHL Sri Lanka 45th Anniversary Film",
     "date": "2025 October",
     "role": "Director",
     "dop": "",
