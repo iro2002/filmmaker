@@ -34,8 +34,80 @@ export const allVideos = {
     ],
     'music-videos': musicVideos,
     'personal-films': [
-        { id: 'p1', title: 'The Journey', src: fallbackVideo, details: 'A short documentary exploring human connections across different cultures and environments.', projectType: 'Short Documentary', date: '2022', role: 'Director / Producer', client: 'Independent', productionHouse: 'Self-Funded' },
-        { id: 'p2', title: 'Quiet Mornings', src: fallbackVideo, details: 'A study on stillness and early morning routines through soft natural light cinematography.', projectType: 'Art Film', date: '2024', role: 'Cinematographer', client: 'Personal Project', productionHouse: 'N/A' }
+        { 
+            id: 'how-could-i-be-myself', 
+            title: 'How Could I Be Myself?', 
+            gdriveId: '1tdegHBMRmkUn98pSyP1jGv_lVpsQy49s', 
+            thumbnail: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80', 
+            details: (
+                <div className="space-y-6">
+                    <p>
+                        “How Could I Be Myself?” started from a question I didn’t fully understand at the time. I was interested in the idea of identity, how we come to recognize ourselves, and how much of that recognition is shaped by memory, expectation, and the people around us. The film became a way of exploring that uncertainty. Not to give answers, but to sit within it.
+                    </p>
+                    <p>
+                        Tharindu’s journey is not just about remembering who he was, but confronting the parts of himself that don’t fit easily into the world around him. That tension between what we feel and what we are expected to be is something I wanted to approach with honesty.
+                    </p>
+                    <p>
+                        This film was made with people who believed in it, often before it fully made sense. What you see is not just the result of an idea, but of trust, collaboration, and the willingness to explore something personal together.
+                    </p>
+                    
+                    <div className="border border-zinc-800 p-6 rounded-sm bg-[#0a0a0a] my-8">
+                        <h3 className="text-white font-serif text-2xl mb-4">Awards & Recognitions</h3>
+                        <p className="text-zinc-400 mb-2">NSBM Youth Film Festival 2023 (Intra-University Category):</p>
+                        <ul className="list-disc list-inside text-zinc-300 space-y-1 mb-4">
+                            <li>Best Film — How Could I Be Myself</li>
+                            <li>Best Direction — Manthila Balasuriya</li>
+                            <li>Best Cinematography — Shihara Osha</li>
+                            <li>Best Editing — Kalindu Kariyawasam</li>
+                            <li>Best Sound Design — Isuru Wikramanayake</li>
+                            <li>Best Actor — Deshan Senarathne</li>
+                        </ul>
+                        <p className="text-zinc-400">Official Selection — Jaffna International Cinema Festival 2023</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                        <div>
+                            <h4 className="text-white font-bold mb-2">Crew</h4>
+                            <ul className="space-y-1 text-zinc-400">
+                                <li><span className="text-zinc-500">Director:</span> Manthila Balasuriya</li>
+                                <li><span className="text-zinc-500">Producer:</span> Pasindu Gunawardhana</li>
+                                <li><span className="text-zinc-500">Director of Photography:</span> Shihara Osha</li>
+                                <li><span className="text-zinc-500">Editor & Colorist:</span> Kalindu Kariyawasam</li>
+                                <li><span className="text-zinc-500">Music:</span> Isuru Wikramanayake</li>
+                                <li><span className="text-zinc-500">Art Direction:</span> Sukitha Maheepala</li>
+                                <li><span className="text-zinc-500">Assistant Director:</span> Ravindu Sampath Wickramasekara</li>
+                                <li><span className="text-zinc-500">Visual Effects:</span> Akila Wanigarathna</li>
+                                <li><span className="text-zinc-500">Sound Recordist:</span> Ranjith Rupasinghe</li>
+                                <li><span className="text-zinc-500">Boom Operator:</span> Pasindu Ekanayake</li>
+                                <li><span className="text-zinc-500">Make-up:</span> Randika Tishan</li>
+                                <li><span className="text-zinc-500">Production Manager:</span> Kasun Gammana Liyanage</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 className="text-white font-bold mb-2">Cast</h4>
+                            <p className="text-zinc-400 leading-relaxed">
+                                Deshan Senarathne, Jeewanthi Perera, Gamini Jayakodi, Dhanu Samarasinghe, Hirushan Hettiarachchi
+                            </p>
+
+                            <h4 className="text-white font-bold mt-8 mb-2">Galleries</h4>
+                            <div className="flex flex-col space-y-2">
+                                <a href="https://drive.google.com/drive/folders/1Zq_DDhvJZR2e51LcLZ4xMrNj3-doBJxm?usp=sharing" target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-white underline transition-colors">
+                                    Behind the Scenes ↗
+                                </a>
+                                <a href="https://drive.google.com/drive/folders/1Zgum29BOQL_HZqjyREDnND38L19-GcDN?usp=sharing" target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-white underline transition-colors">
+                                    Pictures of the Awards ↗
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ),
+            projectType: 'Short Film', 
+            date: '2023', 
+            role: 'Director', 
+            client: 'N/A', 
+            productionHouse: 'KADMAS Productions' 
+        }
     ]
 };
 
@@ -113,7 +185,7 @@ export default function Directing() {
             <div className="w-full px-4 md:px-8 mx-auto max-w-[1800px]">
                 <motion.div
                     layout
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0.5 bg-zinc-900 border border-zinc-900"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0.5 bg-black border border-black"
                 >
                     <AnimatePresence mode="popLayout">
                         {currentVideos.map((video) => (
@@ -127,7 +199,7 @@ export default function Directing() {
                                 className="group relative aspect-video cursor-pointer overflow-hidden bg-black"
                                 onClick={() => navigate(`/project/${video.id}`)}
                             >
-                                {video.vimeoId || video.youtubeId ? (
+                                {video.vimeoId || video.youtubeId || video.gdriveId ? (
                                     <img
                                         src={video.thumbnail || "https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&q=80"}
                                         alt={video.title}

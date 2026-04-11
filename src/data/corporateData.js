@@ -1,5 +1,19 @@
 export const corporateVideos = [
   {
+    "id": "co4",
+    "vimeoId": "1127774900",
+    "vimeoHash": "",
+    "title": "DHL 45th Anniversary Film",
+    "date": "2025 October",
+    "role": "Director",
+    "dop": "",
+    "client": "Pearson International",
+    "productionHouse": "Corporate Photography",
+    "details": "A corporate milestone film for DHL, marking 45 years of operations through a focus on scale, connectivity, and long-standing presence.",
+    "projectType": "Corporate",
+    "thumbnail": "https://i.vimeocdn.com/video/2070595476-9ea2287a4ac58da6d0156a7f17adb1595a18130bdea96aced952dd7eea57e5b5-d_1280x720?region=us"
+  },
+  {
     "id": "co1",
     "vimeoId": "1170974236",
     "vimeoHash": "7b691a66fb",

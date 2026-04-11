@@ -81,6 +81,15 @@ export default function ProjectDetails() {
                             allowFullScreen
                             title={selectedVideo.title}
                         ></iframe>
+                    ) : selectedVideo.gdriveId ? (
+                        <iframe
+                            src={`https://drive.google.com/file/d/${selectedVideo.gdriveId}/preview`}
+                            className="w-full h-full"
+                            frameBorder="0"
+                            allow="autoplay; fullscreen; picture-in-picture"
+                            allowFullScreen
+                            title={selectedVideo.title}
+                        ></iframe>
                     ) : (
                         <video
                             src={selectedVideo.src}
@@ -121,9 +130,9 @@ export default function ProjectDetails() {
 
                     {/* Right Column: Brief/Description */}
                     <div className="lg:col-span-6 xl:col-span-7 pt-2 lg:pt-4">
-                        <p className="text-zinc-300 text-lg md:text-xl leading-relaxed font-light">
+                        <div className="text-zinc-300 text-lg md:text-xl leading-relaxed font-light whitespace-pre-wrap">
                             {selectedVideo.details}
-                        </p>
+                        </div>
                     </div>
                 </motion.div>
 
