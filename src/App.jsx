@@ -21,6 +21,8 @@ import Article from "./components/Article";
 import ProjectDetails from "./components/ProjectDetails";
 import Showreels from "./components/Showreels";
 import Process from "./components/Process";
+import StartProject from "./components/StartProject";
+import VerticalVideos from "./components/VerticalVideos";
 
 // --- HOME PAGE COMPONENT ---
 const Home = () => (
@@ -39,6 +41,7 @@ const Home = () => (
 
     <Price />
    <JournalSection />
+   <VerticalVideos />
 
     <Footer />
   </>
@@ -84,6 +87,14 @@ const ArticleFullPage = () => (
   </>
 );
 
+// --- START PROJECT PAGE COMPONENT ---
+const StartProjectPage = () => (
+  <>
+    <StartProject />
+    <Footer />
+  </>
+);
+
 // --- MAIN APP COMPONENT ---
 const App = () => {
   return (
@@ -101,6 +112,7 @@ const App = () => {
         <Route path="/journal" element={<JournalPage />} />
         <Route path="/journal/:slug" element={<ArticleFullPage />} />
         <Route path="/project/:id" element={<ProjectDetails />} />
+        <Route path="/start-project" element={<StartProjectPage />} />
       </Routes>
       <ChatBox />
     </div>

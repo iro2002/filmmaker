@@ -24,7 +24,6 @@ export default function Header() {
           - Desktop: md:bg-transparent (Remains unchanged as per your request)
       */}
       <div className="relative z-[70] flex justify-between items-center p-6 md:p-6 md:px-12 w-full bg-transparent transition-all">
-
         {/* Left: Name */}
         <div className="flex-1 flex justify-start items-center">
           <Link
@@ -44,23 +43,35 @@ export default function Header() {
             aria-label="Toggle menu"
           >
             <div className="w-6 h-4 flex flex-col justify-between items-end">
-              <span className={`h-[1.5px] bg-white transition-all duration-300 ${isMobileMenuOpen ? "w-6 rotate-45 translate-y-[7px]" : "w-6"}`} />
-              <span className={`h-[1.5px] bg-white transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : "w-4"}`} />
-              <span className={`h-[1.5px] bg-white transition-all duration-300 ${isMobileMenuOpen ? "w-6 -rotate-45 -translate-y-[7px]" : "w-2"}`} />
+              <span
+                className={`h-[1.5px] bg-white transition-all duration-300 ${isMobileMenuOpen ? "w-6 rotate-45 translate-y-[7px]" : "w-6"}`}
+              />
+              <span
+                className={`h-[1.5px] bg-white transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : "w-4"}`}
+              />
+              <span
+                className={`h-[1.5px] bg-white transition-all duration-300 ${isMobileMenuOpen ? "w-6 -rotate-45 -translate-y-[7px]" : "w-2"}`}
+              />
             </div>
           </button>
         </div>
 
         {/* Center: Desktop Pages (Unchanged) */}
         <div className="hidden md:flex flex-1 justify-center gap-12 items-center text-base">
-          <Link to="/directing" className="hover:text-zinc-300 transition-colors">Directing</Link>
-          <Link to="/commercial-producing" className="hover:text-zinc-300 transition-colors">Producing</Link>
+          <Link
+            to="/directing"
+            className="hover:text-zinc-300 transition-colors"
+          >
+            Directing
+          </Link>
         </div>
 
         {/* Right: Desktop CTA (Unchanged) */}
         <div className="hidden md:flex flex-1 justify-end items-center">
           <a
-            href="#contact"
+            href="https://wa.me/94705189977"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-6 py-2 bg-white text-black rounded-full text-sm font-bold hover:bg-zinc-200 transition-colors whitespace-nowrap"
           >
             Book a call
@@ -72,11 +83,15 @@ export default function Header() {
           This only appears when triggered, otherwise the header is just floating text.
       */}
       <div
-        className={`fixed inset-0 bg-black transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        className={`fixed inset-0 bg-black transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${isMobileMenuOpen
+          ? "translate-y-0 opacity-100"
+          : "-translate-y-full opacity-0"
           }`}
       >
         <div className="flex flex-col h-full justify-center px-10 gap-6">
-          <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Navigation</p>
+          <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">
+            Navigation
+          </p>
 
           <Link
             to="/directing"
@@ -94,9 +109,13 @@ export default function Header() {
             Producing
           </Link>
 
-          <div className={`mt-6 transition-all duration-700 delay-300 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
+          <div
+            className={`mt-6 transition-all duration-700 delay-300 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+          >
             <a
-              href="#contact"
+              href="https://wa.me/94705189977"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-lg border-b border-white pb-1 inline-block"
               onClick={() => setIsMobileMenuOpen(false)}
             >
