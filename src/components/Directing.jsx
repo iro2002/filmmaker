@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // Local assets map perfectly to the hospitality section logic!
 import foodVideo from '../images/food.mp4';
 import barVideo from '../images/bar.mp4';
-import promotionVideo from '../images/promotion.mp4';
+import promotionVideo from '../images/Promotion.mp4';
 
 // Extremely reliable fallback video 
 const fallbackVideo = "https://www.w3schools.com/html/mov_bbb.mp4";

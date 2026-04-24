@@ -5,7 +5,7 @@ import Header from "./Header"; // Adjust import path as needed
 import Category from "./Category"; // Embedded inside Hero
 
 // IMPORT YOUR LOCAL VIDEO HERE
-import introVideo from "../images/intro.mp4";
+import introVideo from "../images/Intro.mp4";
 
 
 

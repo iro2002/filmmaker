@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 import foodVideo from '../images/food.mp4';
 import barVideo from '../images/bar.mp4';
-import fashionVideo from '../images/fashion.mp4';
+import fashionVideo from '../images/Fashion.mp4';
 import corporateVideo from '../images/coparate.mp4';
-import promotionVideo from '../images/promotion.mp4';
+import promotionVideo from '../images/Promotion.mp4';
 import viewAllImage from '../images/viewall.jpg';
 
 const categoriesData = [
