@@ -62,7 +62,7 @@ export default function Header() {
             to="/directing"
             className="hover:text-zinc-300 transition-colors"
           >
-            Directing Portpolio
+            Directing Portfolio
           </Link>
         </div>
 
@@ -98,15 +98,7 @@ export default function Header() {
             className={`text-4xl font-light tracking-tight transition-all duration-700 delay-100 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Directing
-          </Link>
-
-          <Link
-            to="/commercial-producing"
-            className={`text-4xl font-light tracking-tight transition-all duration-700 delay-200 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Producing
+            Directing Portfolio
           </Link>
 
           <div
