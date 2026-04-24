@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import introVideo from "../images/Intro.mp4";
+import introVideo from "../images/intro.mp4";
 
 const Showreels = () => {
   const [isPlaying, setIsPlaying] = useState(false);
