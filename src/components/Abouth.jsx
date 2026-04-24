@@ -20,8 +20,8 @@ const Abouth = () => {
                 >
                     <div className="relative w-full max-w-sm md:max-w-md aspect-[4/5] group">
 
-                        {/* 1. Background Ambient Glow */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-zinc-600/20 blur-[80px] -z-20 transition-all duration-700 group-hover:bg-zinc-500/30"></div>
+                        {/* 1. Background Ambient Glow - Hidden on mobile to prevent GPU lag */}
+                        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-zinc-600/20 blur-[80px] -z-20 transition-all duration-700 group-hover:bg-zinc-500/30"></div>
 
                         {/* 2. Offset Wireframe Border (Shifts on hover) - Sharp corners */}
                         <div className="absolute top-6 left-6 w-full h-full border-2 border-zinc-800 z-0 transition-all duration-500 group-hover:top-8 group-hover:left-8 group-hover:border-zinc-700"></div>
@@ -30,17 +30,17 @@ const Abouth = () => {
                         <motion.div
                             animate={{ y: [0, -12, 0] }}
                             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                            className="relative w-full h-full z-10"
+                            className="relative w-full h-full z-10 will-change-transform"
                         >
                             {/* Full Color Image - Sharp corners */}
                             <img
                                 src={manthilaImg}
                                 alt="Portrait of Manthila"
-                                className="w-full h-full object-cover shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-zinc-800/50"
+                                className="w-full h-full object-cover shadow-2xl md:shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-zinc-800/50"
                             />
 
                             {/* Bottom Gradient for depth - Sharp corners */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         </motion.div>
 
                         {/* 4. Decorative cinematic corner accents */}
