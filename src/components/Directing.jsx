@@ -19,7 +19,6 @@ export const categories = [
     { id: 'fashion-films', name: 'Fashion Films' },
   
     { id: 'corporate', name: 'Corporate' },
-    { id: 'events', name: 'Events' },
     { id: 'music-videos', name: 'Music Videos' },
     { id: 'personal-films', name: 'Personal Films' },
 ];
@@ -28,17 +27,13 @@ export const allVideos = {
     'fashion-films': fashionFilmsVideos,
     'hospitality': hospitalityVideos,
     'corporate': corporateVideos,
-    'events': [
-        { id: 'e1', title: 'Live Concert 2025', src: fallbackVideo, details: 'Multi-cam setup for a grand live event capturing the energy and scale of the performance.', projectType: 'Event Coverage', date: 'New Year 2024', role: 'Live Director', client: 'Music Festival', productionHouse: 'LiveStream Pro' },
-        { id: 'e2', title: 'Fashion Week', src: fallbackVideo, details: 'Runway coverage and backstage highlights showcasing fashion in motion and lighting design.', projectType: 'Event Recap', date: 'Fall 2023', role: 'Camera Operator', client: 'Vogue Variations', productionHouse: 'Style Films' }
-    ],
     'music-videos': musicVideos,
     'personal-films': [
         { 
             id: 'how-could-i-be-myself', 
             title: 'How Could I Be Myself?', 
             gdriveId: '1tdegHBMRmkUn98pSyP1jGv_lVpsQy49s', 
-            thumbnail: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80', 
+            thumbnail: 'https://images.unsplash.com/photo-1510832842233-436cb80f2d65?auto=format&fit=crop&w=1200&q=80', 
             details: (
                 <div className="space-y-6">
                     <p>
@@ -115,8 +110,8 @@ export default function Directing() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // Default to fashion-films, or read hash
-    const [activeCategory, setActiveCategory] = useState('fashion-films');
+    // Default to hospitality, or read hash
+    const [activeCategory, setActiveCategory] = useState('hospitality');
 
     // Sync state from URL hash and reset scroll position
     useEffect(() => {

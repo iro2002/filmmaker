@@ -7,7 +7,7 @@ import manthilaImg from '../images/manthila.png';
 
 const Abouth = () => {
     return (
-        <section className="w-full bg-[#050505] py-24 md:py-32 px-4 md:px-8 relative z-10 overflow-hidden">
+        <section id="about" className="w-full bg-[#050505] py-24 md:py-32 px-4 md:px-8 relative z-10 overflow-hidden">
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16 md:gap-20">
 
                 {/* --- CREATIVE IMAGE SECTION --- */}

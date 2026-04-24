@@ -62,7 +62,7 @@ export default function Header() {
             to="/directing"
             className="hover:text-zinc-300 transition-colors"
           >
-            Directing
+            Directing Portpolio
           </Link>
         </div>
 

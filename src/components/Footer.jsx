@@ -162,19 +162,21 @@ export default function Footer() {
           <div className="flex gap-12 text-sm tracking-widest uppercase text-zinc-400">
             <div className="flex flex-col gap-4 items-center md:items-start">
               <a
-                href="#work"
+                href="/directing"
                 className="hover:text-white transition-colors duration-300"
               >
                 Work
               </a>
               <a
-                href="#roster"
+                href="https://wa.me/94705189977"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-white transition-colors duration-300"
               >
-                Roster
+                Available Dates
               </a>
               <a
-                href="#about"
+                href="/#about"
                 className="hover:text-white transition-colors duration-300"
               >
                 About
@@ -182,22 +184,20 @@ export default function Footer() {
             </div>
             <div className="flex flex-col gap-4 items-center md:items-start">
               <a
-                href="#vimeo"
+                href="https://vimeo.com/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-white transition-colors duration-300"
               >
                 Vimeo
               </a>
               <a
-                href="#ig"
+                href="https://www.instagram.com/manthilaproduces?igsh=MXFqdHo0eHlrdmRraw=="
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-white transition-colors duration-300"
               >
                 Instagram
-              </a>
-              <a
-                href="#x"
-                className="hover:text-white transition-colors duration-300"
-              >
-                X (Twitter)
               </a>
             </div>
           </div>

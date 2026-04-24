@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import foodVideo from '../images/food.mp4';
 import barVideo from '../images/bar.mp4';
+import fashionVideo from '../images/fashion.mp4';
+import corporateVideo from '../images/coparate.mp4';
 import promotionVideo from '../images/promotion.mp4';
 import viewAllImage from '../images/viewall.jpg';
 
@@ -22,15 +24,15 @@ const categoriesData = [
     },
     {
         id: 3,
-        name: 'Campaigns',
-        video: promotionVideo,
-        path: '/directing#hospitality'
+        name: 'Fashion',
+        video: fashionVideo,
+        path: '/directing#fashion-films'
     },
     {
         id: 4,
-        name: 'Spaces',
-        video: promotionVideo,
-        path: '/directing#hospitality'
+        name: 'Corporate',
+        video: corporateVideo,
+        path: '/directing#corporate'
     }
 ];
 

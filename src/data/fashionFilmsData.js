@@ -53,6 +53,32 @@ export const fashionFilmsVideos = [
     "productionHouse": "Viral Media LK",
     "details": "This campaign film for Gal Bora adopts a portrait-based approach, featuring women in a range of everyday scenarios without a fixed narrative structure. The focus lies in evoking emotion through composition, lighting, and performance, while the jewellery is presented subtly through natural movement and interaction. Designed for fashion and lifestyle branding, the film emphasizes authenticity, elegance, and understated product storytelling.",
     "projectType": "Fashion Films",
-    "thumbnail": "https://i.vimeocdn.com/video/2102771347-e8b9d3e6e60710af34f19cd6bc3558f02f31008e81574204a908c43301cd9891-d_1280x720?region=us"
+    "thumbnail": "https://vumbnail.com/1151540377.jpg"
+  },
+  {
+    "id": "f5",
+    "youtubeId": "FKicauqklGE",
+    "title": "Bear Appeal - The Bus",
+    "date": "2024 December",
+    "role": "Director",
+    "dop": "Shihara Osha",
+    "client": "Bear Appeal",
+    "productionHouse": "Simple Shoots",
+    "details": "A stylized commercial where a familiar public bus journey is reconstructed in a studio space, using performance and design to blur the line between realism and concept.",
+    "projectType": "Fashion Films",
+    "thumbnail": "https://img.youtube.com/vi/FKicauqklGE/maxresdefault.jpg"
+  },
+  {
+    "id": "f6",
+    "youtubeId": "DVr9T7cw_is",
+    "title": "Bear Appeal - The Office",
+    "date": "2024 December",
+    "role": "Director",
+    "dop": "Shihara Osha",
+    "client": "Bear Appeal",
+    "productionHouse": "Simple Shoots",
+    "details": "A studio-based commercial showing friends enjoying a relaxed office break, highlighting comfort through simple, natural interactions.",
+    "projectType": "Fashion Films",
+    "thumbnail": "https://img.youtube.com/vi/DVr9T7cw_is/maxresdefault.jpg"
   }
 ];

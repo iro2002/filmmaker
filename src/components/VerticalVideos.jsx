@@ -39,7 +39,7 @@ function getOembedUrl(video) {
   const vimeoPageUrl = video.hashParam
     ? `https://vimeo.com/${video.vimeoId}/${video.hashParam}`
     : `https://vimeo.com/${video.vimeoId}`;
-  return `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(vimeoPageUrl)}&width=400`;
+  return `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(vimeoPageUrl)}&width=1280`;
 }
 
 export default function VerticalVideos() {
@@ -55,7 +55,7 @@ export default function VerticalVideos() {
         .then((data) => {
           if (data.thumbnail_url) {
             // request a bigger version by replacing the size in the URL
-            const big = data.thumbnail_url.replace(/_\d+x\d+(\.\w+)$/, "_640x1136$1");
+            const big = data.thumbnail_url.replace(/_\d+x\d+(\.\w+)$/, "_1280x2276$1");
             setThumbnails((prev) => ({ ...prev, [video.vimeoId]: big }));
           }
         })
@@ -139,12 +139,7 @@ export default function VerticalVideos() {
                   </div>
                 </div>
 
-                {/* Title at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-white text-sm font-serif tracking-wide opacity-80 group-hover:opacity-100 transition-opacity">
-                    {video.title}
-                  </p>
-                </div>
+
               </motion.div>
             );
           })}
@@ -176,16 +171,16 @@ export default function VerticalVideos() {
             >
               {/* Close button */}
               <button
-                className="pointer-events-auto absolute top-6 right-6 md:top-10 md:right-10 text-white/50 hover:text-white transition-colors z-[220] w-10 h-10 flex items-center justify-center text-3xl font-light rounded-full border border-white/10 hover:border-white/40 hover:bg-white/10"
+                className="pointer-events-auto absolute top-6 right-6 md:top-10 md:right-10 text-white/50 hover:text-white transition-colors z-[220] w-10 h-10 flex items-center justify-center rounded-full border border-white/10 hover:border-white/40 hover:bg-white/10"
                 onClick={() => setSelectedVideo(null)}
+                aria-label="Close"
               >
-                &times;
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
 
-              {/* Title above */}
-              <p className="pointer-events-none text-zinc-400 text-xs uppercase tracking-widest mb-4 font-light">
-                {selectedVideo.title}
-              </p>
+
 
               {/* Video — fixed height, width from 9:16 ratio */}
               <div
