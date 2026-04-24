@@ -33,7 +33,7 @@ export const allVideos = {
             id: 'how-could-i-be-myself', 
             title: 'How Could I Be Myself?', 
             gdriveId: '1tdegHBMRmkUn98pSyP1jGv_lVpsQy49s', 
-            thumbnail: 'https://images.unsplash.com/photo-1510832842233-436cb80f2d65?auto=format&fit=crop&w=1200&q=80', 
+            thumbnail: 'https://images.unsplash.com/photo-1440407876336-62333a6f010f?auto=format&fit=crop&w=1200&q=80', 
             details: (
                 <div className="space-y-6">
                     <p>

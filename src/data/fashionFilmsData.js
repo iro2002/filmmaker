@@ -53,7 +53,7 @@ export const fashionFilmsVideos = [
     "productionHouse": "Viral Media LK",
     "details": "This campaign film for Gal Bora adopts a portrait-based approach, featuring women in a range of everyday scenarios without a fixed narrative structure. The focus lies in evoking emotion through composition, lighting, and performance, while the jewellery is presented subtly through natural movement and interaction. Designed for fashion and lifestyle branding, the film emphasizes authenticity, elegance, and understated product storytelling.",
     "projectType": "Fashion Films",
-    "thumbnail": "https://vumbnail.com/1151540377.jpg"
+    "thumbnail": "https://i.vimeocdn.com/video/2102771347-e8b9d3e6e60710af34f19cd6bc3558f02f31008e81574204a908c43301cd9891-d_1280x720?region=us"
   },
   {
     "id": "f5",
