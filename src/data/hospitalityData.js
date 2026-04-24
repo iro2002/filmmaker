@@ -107,6 +107,7 @@ export const hospitalityVideos = [
     "projectType": "Hospitality",
     "date": "2026 January",
     "role": "Director",
+    "isVertical": true,
     "dop": "Kalindu Kariyawasam",
     "client": "Hilton Colombo",
     "productionHouse": "Viral Media LK"
@@ -135,6 +136,7 @@ export const hospitalityVideos = [
     "projectType": "Hospitality",
     "date": "2025 December",
     "role": "Director",
+    "isVertical": true,
     "dop": "Kalindu Kariyawasam",
     "client": "Kuredhivaru Resort and Spa Maldives",
     "productionHouse": "Viral Media LK"
@@ -667,6 +669,7 @@ export const hospitalityVideos = [
     "projectType": "Hospitality",
     "date": "2025 January",
     "role": "Director",
+    "isVertical": true,
     "dop": "",
     "client": "Shangri-La Colombo",
     "productionHouse": "Viral Media LK"
@@ -681,6 +684,7 @@ export const hospitalityVideos = [
     "projectType": "Hospitality",
     "date": "2024 November",
     "role": "Director",
+    "isVertical": true,
     "dop": "",
     "client": "Shangri-La Colombo CBG",
     "productionHouse": "Viral Media LK"

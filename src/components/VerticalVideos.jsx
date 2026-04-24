@@ -30,7 +30,7 @@ const verticalVideos = [
 
 function getPlayerUrl(video) {
   // Hash MUST be passed as ?h= query param (not path) for private/unlisted Vimeo videos
-  let url = `https://player.vimeo.com/video/${video.vimeoId}?autoplay=1&loop=0&title=0&byline=0&portrait=0`;
+  let url = `https://player.vimeo.com/video/${video.vimeoId}?autoplay=1&autopause=0&loop=0&title=0&byline=0&portrait=0&dnt=1`;
   if (video.hashParam) url += `&h=${video.hashParam}`;
   return url;
 }
@@ -112,7 +112,7 @@ export default function VerticalVideos() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 onClick={() => setSelectedVideo(video)}
-                className="group relative cursor-pointer overflow-hidden rounded-lg bg-[#111] border border-white/5 hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
+                className="group relative cursor-pointer overflow-hidden rounded-none bg-[#111] border border-white/5 hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
                 style={{ aspectRatio: "9/16" }}
               >
                 {/* Thumbnail */}
@@ -184,7 +184,7 @@ export default function VerticalVideos() {
 
               {/* Video — fixed height, width from 9:16 ratio */}
               <div
-                className="pointer-events-auto relative bg-black rounded-2xl overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.9)] border border-white/10"
+                className="pointer-events-auto relative bg-black rounded-none overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.9)] border border-white/10"
                 style={{
                   height: "min(88vh, 720px)",
                   width: "calc(min(88vh, 720px) * 9 / 16)",

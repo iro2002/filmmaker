@@ -51,8 +51,8 @@ const Process = () => {
 
               {/* --- DESKTOP CONTINUOUS ARROW --- */}
               <div className="hidden md:flex w-full items-center justify-center relative mb-10 h-6">
-                {index < steps.length - 1 && (
-                  <div className="absolute left-[50%] w-full h-[1px] bg-zinc-800/80">
+                {(
+                  <div className="absolute left-[50%] w-[150%] md:w-full h-[1px] bg-zinc-800/80">
                     <motion.div
                       className="absolute top-1/2 left-0 -translate-y-1/2"
                       animate={{
@@ -91,7 +91,7 @@ const Process = () => {
 
               {/* --- MOBILE CONTINUOUS ARROW --- */}
               <div className="md:hidden w-full flex justify-center mb-8 h-20 relative">
-                {index < steps.length - 1 && (
+                {(
                   <div className="w-[1px] h-full bg-zinc-800/80 relative">
                     <motion.div
                       className="absolute left-1/2 -translate-x-1/2"

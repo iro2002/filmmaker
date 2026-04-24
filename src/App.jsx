@@ -23,10 +23,12 @@ import Showreels from "./components/Showreels";
 import Process from "./components/Process";
 import StartProject from "./components/StartProject";
 import VerticalVideos from "./components/VerticalVideos";
+import ScrollProgress from "./components/ScrollProgress";
 
 // --- HOME PAGE COMPONENT ---
 const Home = () => (
   <>
+    <ScrollProgress />
     <Hero />
 
     <Abouth />

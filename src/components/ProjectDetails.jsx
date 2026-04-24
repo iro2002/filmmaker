@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { allVideos } from './Directing'; 
@@ -23,10 +23,34 @@ export default function ProjectDetails() {
         }
     }
 
+    const [fetchedIsVertical, setFetchedIsVertical] = useState(false);
+
     // Always scroll to top when mounting
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [id]);
+
+    // Dynamically detect if video is vertical via Vimeo oEmbed
+    useEffect(() => {
+        setFetchedIsVertical(false);
+        if (selectedVideo && selectedVideo.vimeoId) {
+            // If it's already flagged in data, no need to fetch
+            if (selectedVideo.isVertical) return; 
+
+            const vimeoPageUrl = selectedVideo.vimeoHash
+                ? `https://vimeo.com/${selectedVideo.vimeoId}/${selectedVideo.vimeoHash}`
+                : `https://vimeo.com/${selectedVideo.vimeoId}`;
+                
+            fetch(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent(vimeoPageUrl)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.width && data.height && data.width < data.height) {
+                        setFetchedIsVertical(true);
+                    }
+                })
+                .catch(() => {});
+        }
+    }, [selectedVideo]);
 
     if (!selectedVideo) {
         return (
@@ -61,7 +85,7 @@ export default function ProjectDetails() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="w-full aspect-video bg-black rounded-sm overflow-hidden mb-12 shadow-[0_0_40px_rgba(0,0,0,0.8)] border border-white/5"
+                    className={`w-full bg-black rounded-sm overflow-hidden mb-12 shadow-[0_0_40px_rgba(0,0,0,0.8)] border border-white/5 ${(selectedVideo.isVertical || fetchedIsVertical) ? "aspect-[9/16] max-w-[min(100%,460px)] mx-auto" : "aspect-video"}`}
                 >
                     {selectedVideo.vimeoId ? (
                         <iframe
