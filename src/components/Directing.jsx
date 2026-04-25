@@ -214,7 +214,7 @@ export default function Directing() {
                                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500" />
 
                                 {/* Play icon overlay */}
-                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-90 group-hover:scale-100 transform z-10">
+                                <div className="absolute inset-0 flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition-all duration-300 scale-100 md:scale-90 group-hover:scale-100 transform z-10">
                                     <div className="w-16 h-16 rounded-full border border-white/50 flex items-center justify-center bg-black/30 backdrop-blur-sm shadow-2xl">
                                         <svg className="w-6 h-6 ml-1 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                                     </div>

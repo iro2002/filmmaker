@@ -5,7 +5,7 @@ import { Instagram, Facebook, MessageCircle, X } from "lucide-react";
 const socials = [
   { 
     icon: MessageCircle, 
-    url: "https://wa.me/94722006206", 
+    url: "https://wa.me/94705189977", 
     label: "WhatsApp"
   },
   { 

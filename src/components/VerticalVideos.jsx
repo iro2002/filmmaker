@@ -131,7 +131,7 @@ export default function VerticalVideos() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
 
                 {/* Play button */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-90 group-hover:scale-100">
+                <div className="absolute inset-0 flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-100 md:scale-90 group-hover:scale-100">
                   <div className="w-14 h-14 rounded-full border border-white/60 flex items-center justify-center bg-black/50 backdrop-blur-md shadow-2xl">
                     <svg className="w-5 h-5 ml-1 text-white" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z" />

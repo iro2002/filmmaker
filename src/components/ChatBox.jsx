@@ -37,7 +37,7 @@ const RealChatBox = () => {
     // 2. Redirect to WhatsApp
     // REPLACE THIS with your actual WhatsApp number (Include country code, no '+' or spaces)
     // Example: "14155552671" for US, "447700900077" for UK
-    const myWhatsAppNumber = "1234567890";
+    const myWhatsAppNumber = "94705189977";
 
     // Encode the text so it is safe for a URL
     const encodedMessage = encodeURIComponent(inputValue);
