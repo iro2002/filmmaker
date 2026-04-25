@@ -1,5 +1,47 @@
 export const hospitalityVideos = [
   {
+    "id": "h-new-1",
+    "title": "Jameson Black Barrel Bartender Series: KZ Shankar",
+    "vimeoId": "1181113909",
+    "vimeoHash": "",
+    "thumbnail": "",
+    "details": "A narrative-led film following mixologist KZ Shankar as he crafts a cocktail inspired by Sri Lankan ingredients moving from local markets to the bar, where culture, flavour, and precision come together.",
+    "projectType": "Hospitality",
+    "date": "2025",
+    "role": "Director",
+    "dop": "Kalindu Kariyawasam",
+    "client": "Project Cocktail",
+    "productionHouse": "Simple Shoots"
+  },
+  {
+    "id": "h-new-2",
+    "title": "The Takeover — Smoke & Bitters × Project Cocktail",
+    "vimeoId": "1181109821",
+    "vimeoHash": "",
+    "thumbnail": "",
+    "details": "A promotional event film for Project Cocktail, capturing a bartender takeover through atmosphere, interaction, and a high-energy social environment.",
+    "projectType": "Hospitality",
+    "date": "2025",
+    "role": "Director",
+    "dop": "Kalindu Kariyawasam",
+    "client": "Project Cocktail",
+    "productionHouse": "Simple Shoots"
+  },
+  {
+    "id": "h-new-3",
+    "title": "World Class India Akash Rajapaksha",
+    "vimeoId": "1181104123",
+    "vimeoHash": "",
+    "thumbnail": "",
+    "details": "A narrative-led film following Akash Rajapaksha, winner of World Class Sri Lanka, as he interprets Colombo’s energy and culture through a series of cocktail creations.",
+    "projectType": "Hospitality",
+    "date": "2026",
+    "role": "Director",
+    "dop": "Kalindu Kariyawasam",
+    "client": "Cinnamon Lakeside Colombo",
+    "productionHouse": "Simple Shoots"
+  },
+  {
     "id": "h1",
     "title": "Hilton Beach Experience Video",
     "vimeoId": "1180895167",
