@@ -14,7 +14,10 @@ const StartProject = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#050505] text-white pt-32 pb-20 px-4 md:px-8 font-sans relative z-10 flex flex-col items-center">
+    <div 
+      className="w-full min-h-screen text-white pt-32 pb-20 px-4 md:px-8 font-sans relative z-10 flex flex-col items-center bg-cover bg-center bg-no-repeat bg-fixed"
+      style={{ backgroundImage: `linear-gradient(to bottom, rgba(5,5,5,0.85), rgba(5,5,5,0.98)), url('https://images.unsplash.com/photo-1728022036706-71a134c82887?q=80&w=762&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')` }}
+    >
       {/* HEADER SECTION */}
       <div className="text-center max-w-2xl mx-auto mb-20">
         <motion.h1
@@ -150,12 +153,14 @@ const StartProject = () => {
                   className="w-full bg-[#0f0f0f] border border-white/10 px-5 py-4 text-white text-sm placeholder:text-zinc-600 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all duration-300 resize-y min-h-[140px]"
                 ></textarea>
 
-                <button
-                  type="button"
-                  className="w-full bg-white text-black font-bold text-xs uppercase tracking-widest py-5 mt-4 hover:bg-zinc-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300"
+                <a
+                  href="https://wa.me/94705189977"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full block text-center bg-white text-black font-bold text-xs uppercase tracking-widest py-5 mt-4 hover:bg-zinc-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300"
                 >
-                  Submit Project Details
-                </button>
+                  Send Details via WhatsApp
+                </a>
               </form>
             </motion.div>
           )}

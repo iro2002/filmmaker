@@ -167,14 +167,7 @@ export default function Footer() {
               >
                 Work
               </a>
-              <a
-                href="https://wa.me/94705189977"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors duration-300"
-              >
-                Available Dates
-              </a>
+
               <a
                 href="/#about"
                 className="hover:text-white transition-colors duration-300"
