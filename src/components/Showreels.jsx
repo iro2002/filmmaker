@@ -51,7 +51,7 @@ const Showreels = () => {
 
       {/* Showreel Credits */}
       <div className="absolute bottom-6 md:bottom-10 w-full text-center text-white/60 text-[10px] md:text-xs tracking-[0.3em] uppercase font-light z-20 pointer-events-none drop-shadow-md">
-        Directed by Manthila Balasuriya · Produced by Viral Media LK
+        Produced by Viral Media LK . Directed by Manthila Balasuriya
       </div>
     </div>
   );

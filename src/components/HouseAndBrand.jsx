@@ -40,7 +40,7 @@ const HouseAndBrand = () => {
               viewport={{ once: true }}
               className="text-zinc-400 text-sm md:text-base mb-2"
             >
-              Directed For
+              Working For
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
